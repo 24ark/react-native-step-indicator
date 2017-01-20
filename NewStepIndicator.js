@@ -1,9 +1,9 @@
 
 import React, { Component,PropTypes } from 'react';
 import { View,Text,StyleSheet } from 'react-native';
+
 const STEP_COUNT = 5;
 const STEP_INDICATOR_SIZE = 30;
-const SELECTED_STEP_INDICATOR_SIZE_DELTA = 10;
 const SEPARATOR_STROKE_WIDTH = 10;
 const STEP_INDICATOR_COLOR_CURRENT = '#ffffff';
 const STEP_INDICATOR_COLOR_FINISHED = '#4aae4f';
@@ -14,6 +14,24 @@ const STEP_INDICATOR_LABEL_SIZE = 15;
 const STEP_INDICATOR_LABEL_COLOR_CURRENT = '#000000';
 const STEP_INDICATOR_LABEL_COLOR_FINISHED = '#ffffff';
 const STEP_INDICATOR_LABEL_COLOR_UNFINISHED = 'rgba(255,255,255,0.5)';
+const CURRENT_STEP_INDICATOR_STROKE_WIDTH = 5;
+
+var customStyles = {
+  stepIndicatorSize: 30,
+  currentStepIndicatorSize:40,
+  separatorStrokeWidth: 8,
+  currentStepStrokeWidth: 5,
+  separatorFinishedColor: '#4aae4f',
+  separatorUnFinishedColor: '#a4d4a5',
+  stepIndicatorFinishedColor: '#4aae4f',
+  stepIndicatorUnFinishedColor: '#a4d4a5',
+  stepIndicatorCurrentColor: '#ffffff',
+  stepIndicatorLabelFontSize: 15,
+  currentStepIndicatorLabelFontSize: 15,
+  stepIndicatorLabelCurrentColor: '#000000',
+  stepIndicatorLabelFinishedColor: '#ffffff',
+  stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)'
+}
 
 export default class NewStepIndicator extends Component {
 
@@ -22,22 +40,17 @@ export default class NewStepIndicator extends Component {
     this.state = {
       width:0
     }
+    customStyles = Object.assign(customStyles, props.customStyles);
   }
 
   render() {
     const { labels } = this.props;
     return (
-      <View onLayout={(event) => this.measureView(event)} style={styles.container}>
+      <View onLayout={(event) => this.setState({width: event.nativeEvent.layout.width})} style={defaultStyle.container}>
         {this.renderStepIndicator()}
         {labels && this.renderStepLabels()}
       </View>
     );
-  }
-
-  measureView(event) {
-    this.setState({
-      width: event.nativeEvent.layout.width,
-    })
   }
 
   renderStepIndicator = () => {
@@ -45,12 +58,12 @@ export default class NewStepIndicator extends Component {
     const { labels } = this.props;
     for(let position = 0 ; position < STEP_COUNT ; position++) {
       steps.push(
-        <View key={position} style={styles.stepContainer}>
+        <View key={position} style={defaultStyle.stepContainer}>
           {this.renderStep(position)}
         </View>)
       }
       return(
-        <View style={styles.stepIndicatorContainer}>
+        <View style={defaultStyle.stepIndicatorContainer}>
           {steps}
         </View>
       )
@@ -60,14 +73,14 @@ export default class NewStepIndicator extends Component {
       const { labels } = this.props;
       var labelViews = labels.map((label,index) => {
         return (
-          <Text key={index} style={styles.stepLabel}>
+          <Text key={index} style={defaultStyle.stepLabel}>
             {label}
           </Text>
         )
       });
 
       return(
-        <View style={styles.stepLabelsContainer}>
+        <View style={defaultStyle.stepLabelsContainer}>
           {labelViews}
         </View>
       )
@@ -79,32 +92,50 @@ export default class NewStepIndicator extends Component {
       let indicatorLabelStyle;
       let leftSeparatorStyle;
       let rightSeparatorStyle;
+      const separatorStyle = { height: customStyles.separatorStrokeWidth }
       if(position === currentPosition) {
-        stepStyle = styles.stepCurrent;
-        indicatorLabelStyle = styles.indicatorLabelCurrent;
-        leftSeparatorStyle = styles.separatorFinished;
-        rightSeparatorStyle = styles.separatorUnFinished;
+        stepStyle = {
+          backgroundColor:customStyles.stepIndicatorCurrentColor,
+          borderWidth:customStyles.currentStepStrokeWidth,
+          borderColor:customStyles.stepIndicatorFinishedColor,
+          height:customStyles.currentStepIndicatorSize,
+          width:customStyles.currentStepIndicatorSize,
+          borderRadius:(customStyles.currentStepIndicatorSize) / 2
+        };
+        indicatorLabelStyle = { fontSize: customStyles.currentStepIndicatorLabelFontSize, color: customStyles.stepIndicatorLabelCurrentColor };
+        leftSeparatorStyle = { backgroundColor: customStyles.separatorFinishedColor };
+        rightSeparatorStyle = { backgroundColor: customStyles.separatorUnFinishedColor };
       }
       else if(position < currentPosition){
-        stepStyle = styles.stepFinished;
-        indicatorLabelStyle = styles.indicatorLabelFinished;
-        leftSeparatorStyle = styles.separatorFinished;
-        rightSeparatorStyle = styles.separatorFinished;
+        stepStyle = {
+          backgroundColor: customStyles.stepIndicatorFinishedColor,
+          height:customStyles.stepIndicatorSize,
+          width:customStyles.stepIndicatorSize,
+          borderRadius:(customStyles.stepIndicatorSize) / 2
+         };
+        indicatorLabelStyle = { fontSize: customStyles.stepIndicatorLabelFontSize, color: customStyles.stepIndicatorLabelFinishedColor };;
+        leftSeparatorStyle = { backgroundColor: customStyles.separatorFinishedColor };
+        rightSeparatorStyle = { backgroundColor: customStyles.separatorFinishedColor };
       }
       else {
-        stepStyle = styles.stepUnFinished;
-        indicatorLabelStyle = styles.indicatorLabelUnFinished;
-        leftSeparatorStyle = styles.separatorUnFinished;
-        rightSeparatorStyle = styles.separatorUnFinished;
+        stepStyle = {
+          backgroundColor: customStyles.stepIndicatorUnFinishedColor,
+          height:customStyles.stepIndicatorSize,
+          width:customStyles.stepIndicatorSize,
+          borderRadius:(customStyles.stepIndicatorSize) / 2
+         };
+        indicatorLabelStyle = { fontSize: customStyles.stepIndicatorLabelFontSize, color: customStyles.stepIndicatorLabelUnFinishedColor };
+        leftSeparatorStyle = { backgroundColor: customStyles.separatorUnFinishedColor };
+        rightSeparatorStyle = { backgroundColor: customStyles.separatorUnFinishedColor };
       }
 
 
       return [
-        <View key={'left-separator'} style={[styles.separator,(position !== 0) ? leftSeparatorStyle : {backgroundColor:'transparent'},{width:this.getSeparatorWidth(), marginRight:-1*(STEP_INDICATOR_SIZE/2)}]}/>,
-        <View key={'step-indicator'} style={[styles.step , stepStyle ]}>
-          <Text style={[styles.indicatorLabel , indicatorLabelStyle]}>{ position + 1 }</Text>
+        <View key={'left-separator'} style={[separatorStyle,(position !== 0) ? leftSeparatorStyle : {backgroundColor:'transparent'},{width:this.getSeparatorWidth(), marginRight:-1*(STEP_INDICATOR_SIZE/2)}]}/>,
+        <View key={'step-indicator'} style={[defaultStyle.step , stepStyle ]}>
+          <Text style={indicatorLabelStyle}>{ position + 1 }</Text>
         </View>,
-        <View key={'right-separator'} style={[styles.separator,(position !== STEP_COUNT - 1) ? rightSeparatorStyle : {backgroundColor:'transparent'},{width:this.getSeparatorWidth(), marginLeft:-1*(STEP_INDICATOR_SIZE/2)}]}/>
+        <View key={'right-separator'} style={[separatorStyle,(position !== STEP_COUNT - 1) ? rightSeparatorStyle : {backgroundColor:'transparent'},{width:this.getSeparatorWidth(), marginLeft:-1*(STEP_INDICATOR_SIZE/2)}]}/>
       ];
     }
 
@@ -118,9 +149,9 @@ export default class NewStepIndicator extends Component {
     }
   }
 
-  const styles = StyleSheet.create({
+  const defaultStyle =  StyleSheet.create({
     container: {
-      backgroundColor:'yellow'
+      backgroundColor:'transparent'
     },
     stepIndicatorContainer: {
       flexDirection:'row',
@@ -134,49 +165,10 @@ export default class NewStepIndicator extends Component {
       paddingTop: 8
     },
     step: {
-      height:STEP_INDICATOR_SIZE,
-      width:STEP_INDICATOR_SIZE,
-      borderRadius:STEP_INDICATOR_SIZE / 2,
       alignItems:'center',
       justifyContent:'center',
       zIndex: 2,
       elevation:3
-    },
-    stepCurrent: {
-      backgroundColor:STEP_INDICATOR_COLOR_CURRENT,
-      borderWidth:5,
-      borderColor:STEP_INDICATOR_COLOR_FINISHED,
-      height:STEP_INDICATOR_SIZE+SELECTED_STEP_INDICATOR_SIZE_DELTA,
-      width:STEP_INDICATOR_SIZE+SELECTED_STEP_INDICATOR_SIZE_DELTA,
-      borderRadius:(STEP_INDICATOR_SIZE+SELECTED_STEP_INDICATOR_SIZE_DELTA) / 2
-    },
-    stepFinished: {
-      backgroundColor:STEP_INDICATOR_COLOR_FINISHED,
-    },
-    stepUnFinished: {
-      backgroundColor:STEP_INDICATOR_COLOR_UNFINISHED
-    },
-    separator: {
-      height:SEPARATOR_STROKE_WIDTH
-    },
-    separatorFinished: {
-      backgroundColor:SEPARATOR_COLOR_FINISHED
-    },
-    separatorUnFinished: {
-      backgroundColor:SEPARATOR_COLOR_UNFINISHED
-    },
-    indicatorLabel: {
-      fontSize: STEP_INDICATOR_LABEL_SIZE,
-      color:'#ffffff'
-    },
-    indicatorLabelCurrent: {
-      color:STEP_INDICATOR_LABEL_COLOR_CURRENT,
-    },
-    indicatorLabelFinished: {
-      color:STEP_INDICATOR_LABEL_COLOR_FINISHED
-    },
-    indicatorLabelUnFinished: {
-      color:STEP_INDICATOR_LABEL_COLOR_UNFINISHED
     },
     stepContainer: {
       flex:1,
@@ -193,9 +185,24 @@ export default class NewStepIndicator extends Component {
   });
 
   NewStepIndicator.propTypes = {
-    currentPosition: PropTypes.number
+    currentPosition: PropTypes.number,
+    stepCount: PropTypes.number,
+    customStyles: PropTypes.object
   };
 
   NewStepIndicator.defaultProps = {
-    currentPosition: 0
+    currentPosition: 0,
+    stepCount: 5,
+    stepIndicatorSize: 30,
+    separatorStrokeWidth: 8,
+    currentStepStrokeWidth: 5,
+    separatorFinishedColor: '#4aae4f',
+    separatorUnFinishedColor: '#a4d4a5',
+    stepIndicatorFinishedColor: '#4aae4f',
+    stepIndicatorUnFinishedColor: '#a4d4a5',
+    stepIndicatorCurrentColor: '#ffffff',
+    stepIndicatorLabelFontSize: 15,
+    stepIndicatorLabelCurrentColor: '#000000',
+    stepIndicatorLabelFinishedColor: '#ffffff',
+    stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)'
   }
