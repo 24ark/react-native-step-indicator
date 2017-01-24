@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry,StyleSheet,View, Text } from 'react-native';
 import ViewPager from 'react-native-viewpager';
-import StepIndicator from '../StepIndicator';
+import StepIndicator from './StepIndicator';
+import VerticalStepIndicator from './VerticalStepIndicator';
 const PAGES = ['Page 1','Page 2','Page 3','Page 4','Page 5'];
 
 export default class App extends Component {
@@ -23,6 +24,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <StepIndicator currentPosition={this.state.currentPage} labels={["label 1","label 2","label 3","label 4","label 5"]} />
+          <StepIndicator direction='vertical' currentPosition={this.state.currentPage} labels={["label 1","label 2","label 3","label 4","label 5"]} />
         <ViewPager
           dataSource={this.state.dataSource}
           renderPage={this.renderViewPagerPage}

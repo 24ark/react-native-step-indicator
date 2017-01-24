@@ -16,7 +16,10 @@ var customStyles = {
   currentStepIndicatorLabelFontSize: 15,
   stepIndicatorLabelCurrentColor: '#000000',
   stepIndicatorLabelFinishedColor: '#ffffff',
-  stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)'
+  stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)',
+  labelColor: '#000000',
+  labelSize: 13,
+  currentStepLabelColor: '#4aae4f'
 }
 
 export default class StepIndicator extends Component {
@@ -24,15 +27,16 @@ export default class StepIndicator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width:0
+      width:0,
+      height:0
     }
     customStyles = Object.assign(customStyles, props.customStyles);
   }
 
   render() {
-    const { labels } = this.props;
+    const { labels, direction } = this.props;
     return (
-      <View onLayout={(event) => this.setState({width: event.nativeEvent.layout.width})} style={defaultStyle.container}>
+      <View onLayout={(event) => this.setState({width: event.nativeEvent.layout.width, height: event.nativeEvent.layout.height})} style={[defaultStyle.container, direction === 'vertical' ? {flexDirection: 'row'} : {flexDirection: 'column'}]}>
         {this.renderStepIndicator()}
         {labels && this.renderStepLabels()}
       </View>
@@ -41,44 +45,45 @@ export default class StepIndicator extends Component {
 
   renderStepIndicator = () => {
     let steps = [];
-    const { labels, stepCount } = this.props;
+    const { labels, stepCount, direction } = this.props;
     for(let position = 0 ; position < stepCount ; position++) {
       steps.push(
-        <View key={position} style={defaultStyle.stepContainer}>
+        <View key={position} style={[defaultStyle.stepContainer, direction === 'vertical' ? {flexDirection: 'column'} : {flexDirection: 'row'}]}>
           {this.renderStep(position)}
         </View>)
       }
       return(
-        <View style={defaultStyle.stepIndicatorContainer}>
+        <View style={[defaultStyle.stepIndicatorContainer, direction === 'vertical' ? {flexDirection: 'column'} : {flexDirection: 'row'}]}>
           {steps}
         </View>
       )
     }
 
     renderStepLabels = () => {
-      const { labels } = this.props;
+      const { labels, direction, currentPosition } = this.props;
       var labelViews = labels.map((label,index) => {
+        const selectedStepLabelStyle = index === currentPosition ? { color: customStyles.currentStepLabelColor } : { color: customStyles.labelColor }
         return (
-          <Text key={index} style={defaultStyle.stepLabel}>
+          <Text key={index} style={[defaultStyle.stepLabel,selectedStepLabelStyle , { fontSize: customStyles.labelSize }]}>
             {label}
           </Text>
         )
       });
 
       return(
-        <View style={defaultStyle.stepLabelsContainer}>
+        <View style={[defaultStyle.stepLabelsContainer, direction === 'vertical' ? {flexDirection: 'column', paddingHorizontal:4} : {flexDirection: 'row', paddingVertical:4}]}>
           {labelViews}
         </View>
       )
     }
 
     renderStep = (position) => {
-      const { currentPosition, stepCount } = this.props;
+      const { currentPosition, stepCount, direction } = this.props;
       let stepStyle;
       let indicatorLabelStyle;
       let leftSeparatorStyle;
       let rightSeparatorStyle;
-      const separatorStyle = { height: customStyles.separatorStrokeWidth }
+      const separatorStyle = (direction === 'vertical') ? { width: customStyles.separatorStrokeWidth } : { height: customStyles.separatorStrokeWidth }
       if(position === currentPosition) {
         stepStyle = {
           backgroundColor:customStyles.stepIndicatorCurrentColor,
@@ -117,17 +122,17 @@ export default class StepIndicator extends Component {
 
 
       return [
-        <View key={'left-separator'} style={[separatorStyle,(position !== 0) ? leftSeparatorStyle : {backgroundColor:'transparent'},{width:this.getSeparatorWidth(), marginRight:-1*(customStyles.stepIndicatorSize/2)}]}/>,
+        <View key={'left-separator'} style={[separatorStyle,(position !== 0) ? leftSeparatorStyle : {backgroundColor:'transparent'}, direction === 'vertical' ? {height:this.getSeparatorWidth(), marginTop:-1*(customStyles.stepIndicatorSize/2)} : {width:this.getSeparatorWidth(), marginRight:-1*(customStyles.stepIndicatorSize/2)}]}/>,
         <View key={'step-indicator'} style={[defaultStyle.step , stepStyle ]}>
           <Text style={indicatorLabelStyle}>{ position + 1 }</Text>
         </View>,
-        <View key={'right-separator'} style={[separatorStyle,(position !== stepCount - 1) ? rightSeparatorStyle : {backgroundColor:'transparent'},{width:this.getSeparatorWidth(), marginLeft:-1*(customStyles.stepIndicatorSize/2)}]}/>
+        <View key={'right-separator'} style={[separatorStyle,(position !== stepCount - 1) ? rightSeparatorStyle : {backgroundColor:'transparent'},direction === 'vertical' ? {height:this.getSeparatorWidth(), marginBottom:-1*(customStyles.stepIndicatorSize/2)} : {width:this.getSeparatorWidth(), marginRight:-1*(customStyles.stepIndicatorSize/2)}]}/>
       ];
     }
 
     getSeparatorWidth = () => {
-      const { stepCount } = this.props;
-      const separatorWidth = (this.state.width/(stepCount*2));
+      const { stepCount, direction } = this.props;
+      const separatorWidth = direction === 'vertical' ? (this.state.height/(stepCount*2)) : (this.state.width/(stepCount*2));
       return separatorWidth;
     }
 
@@ -138,6 +143,7 @@ export default class StepIndicator extends Component {
 
   const defaultStyle =  StyleSheet.create({
     container: {
+      flex:1,
       backgroundColor:'transparent'
     },
     stepIndicatorContainer: {
@@ -148,8 +154,7 @@ export default class StepIndicator extends Component {
     stepLabelsContainer: {
       flexDirection:'row',
       alignItems:'center',
-      justifyContent:'space-around',
-      paddingTop: 8
+      justifyContent:'space-around'
     },
     step: {
       alignItems:'center',
@@ -167,7 +172,7 @@ export default class StepIndicator extends Component {
       flex:1,
       fontSize:12,
       textAlign:'center',
-      alignSelf:'flex-start'
+      textAlignVertical:'center'
     }
   });
 
