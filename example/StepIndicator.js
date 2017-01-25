@@ -64,9 +64,11 @@ export default class StepIndicator extends Component {
       var labelViews = labels.map((label,index) => {
         const selectedStepLabelStyle = index === currentPosition ? { color: customStyles.currentStepLabelColor } : { color: customStyles.labelColor }
         return (
-          <Text key={index} style={[defaultStyle.stepLabel,selectedStepLabelStyle , { fontSize: customStyles.labelSize }]}>
-            {label}
-          </Text>
+          <View style={defaultStyle.stepLabelItem} key={index}>
+            <Text style={[defaultStyle.stepLabel,selectedStepLabelStyle , { fontSize: customStyles.labelSize }]}>
+              {label}
+            </Text>
+          </View>
         )
       });
 
@@ -103,7 +105,7 @@ export default class StepIndicator extends Component {
           height:customStyles.stepIndicatorSize,
           width:customStyles.stepIndicatorSize,
           borderRadius:(customStyles.stepIndicatorSize) / 2
-         };
+        };
         indicatorLabelStyle = { fontSize: customStyles.stepIndicatorLabelFontSize, color: customStyles.stepIndicatorLabelFinishedColor };;
         leftSeparatorStyle = { backgroundColor: customStyles.separatorFinishedColor };
         rightSeparatorStyle = { backgroundColor: customStyles.separatorFinishedColor };
@@ -114,7 +116,7 @@ export default class StepIndicator extends Component {
           height:customStyles.stepIndicatorSize,
           width:customStyles.stepIndicatorSize,
           borderRadius:(customStyles.stepIndicatorSize) / 2
-         };
+        };
         indicatorLabelStyle = { fontSize: customStyles.stepIndicatorLabelFontSize, color: customStyles.stepIndicatorLabelUnFinishedColor };
         leftSeparatorStyle = { backgroundColor: customStyles.separatorUnFinishedColor };
         rightSeparatorStyle = { backgroundColor: customStyles.separatorUnFinishedColor };
@@ -152,7 +154,6 @@ export default class StepIndicator extends Component {
       justifyContent:'space-around'
     },
     stepLabelsContainer: {
-      flexDirection:'row',
       alignItems:'center',
       justifyContent:'space-around'
     },
@@ -169,10 +170,13 @@ export default class StepIndicator extends Component {
       justifyContent:'center'
     },
     stepLabel: {
-      flex:1,
       fontSize:12,
-      textAlign:'center',
-      textAlignVertical:'center'
+      textAlign:'center'
+    },
+    stepLabelItem: {
+      flex:1,
+      alignItems:'center',
+      justifyContent:'center'
     }
   });
 
