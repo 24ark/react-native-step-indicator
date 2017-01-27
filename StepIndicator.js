@@ -8,8 +8,6 @@ const STEP_STATUS = {
   UNFINISHED:'unfinished'
 }
 
-
-
 export default class StepIndicator extends Component {
 
   constructor(props) {
@@ -25,8 +23,8 @@ export default class StepIndicator extends Component {
       currentStepIndicatorSize:40,
       separatorStrokeWidth: 3,
       currentStepStrokeWidth: 5,
-      stepStrokeCurrentColor: '#4aae4f',
       stepStrokeWidth: 0,
+      stepStrokeCurrentColor: '#4aae4f',
       stepStrokeFinishedColor: '#4aae4f',
       stepStrokeUnFinishedColor: '#4aae4f',
       separatorFinishedColor: '#4aae4f',
@@ -219,7 +217,8 @@ export default class StepIndicator extends Component {
     currentPosition: PropTypes.number,
     stepCount: PropTypes.number,
     customStyles: PropTypes.object,
-    direction: PropTypes.oneOf(['vertical', 'horizontal'])
+    direction: PropTypes.oneOf(['vertical', 'horizontal']),
+    labels: PropTypes.array
   };
 
   StepIndicator.defaultProps = {

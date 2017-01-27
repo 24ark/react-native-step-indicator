@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ListView } from 'react-native';
-import StepIndicator from './StepIndicator';
+import StepIndicator from 'react-native-step-indicator';
 import dummyData from './data';
 
 const stepIndicatorStyles = {

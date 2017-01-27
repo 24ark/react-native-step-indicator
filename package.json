@@ -1,7 +1,7 @@
 {
   "name": "react-native-step-indicator",
   "version": "0.0.1",
-  "description": "A simple react-native implementation step indicator widget compatible with the ViewPager.",
+  "description": "A simple react-native implementation of step indicator widget compatible with the ViewPager and ListView",
   "main": "StepIndicator.js",
   "directories": {
     "example": "example"
@@ -19,10 +19,12 @@
     "android",
     "react-native",
     "step-indicator",
-    "viewpager"
+    "viewpager",
+    "scrollview",
+    "listview"
   ],
   "author": "Arkit Vora",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "bugs": {
     "url": "https://github.com/24ark/react-native-step-indicator/issues"
   },
