@@ -2930,6 +2930,10 @@ react-native-paged-scroll-view@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-native-paged-scroll-view/-/react-native-paged-scroll-view-2.0.4.tgz#a8f1a693bf390543a6c3c57dc0e51db53f969428"
 
+react-native-step-indicator@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-step-indicator/-/react-native-step-indicator-0.0.2.tgz#deca35360d04391b56d2508fbf00a7f785fc727c"
+
 react-native-viewpager@^0.2.13:
   version "0.2.13"
   resolved "https://registry.yarnpkg.com/react-native-viewpager/-/react-native-viewpager-0.2.13.tgz#75e421ae90e89efcd77d2c077c0525382b7c39c5"
