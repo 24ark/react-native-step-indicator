@@ -7,11 +7,12 @@ Features
   - Can be used with ViewPager and Listview
   - Custom Styling
   - Supports vertical and horizontal orientation
-  
-  
+  - Supports animation between steps
+
+
 ![alt tag](art/HorizontalStepIndicator.gif) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![alt tag](art/VerticalStepIndicator.gif)
  [example/HorizontalStepIndicatorExample.js](example/HorizontalStepIndicatorExample.js)   &nbsp;&nbsp;&nbsp;&nbsp; [example/VerticalStepIndicatorExample.js](example/VerticalStepIndicatorExample.js)
-  
+
 ### Example
 ```sh
 $ cd example
@@ -19,7 +20,7 @@ $ npm i
 $ react-native run-ios   // For ios
 $ react-native run-android   // For Android
 ```
- 
+
 ### Installation
 ```npm install react-native-step-indicator --save```
 
@@ -61,10 +62,10 @@ constructor() {
 
 render() {
   return (
-    <StepIndicator 
-         customStyles={customStyles} 
-         currentPosition={this.state.currentPosition} 
-         labels={labels} 
+    <StepIndicator
+         customStyles={customStyles}
+         currentPosition={this.state.currentPosition}
+         labels={labels}
     />
   )
 }
@@ -119,5 +120,3 @@ If you'd like to see something added or changed to this module please open a new
 ### License
 
  - [Apache-2.0](https://github.com/24ark/react-native-step-indicator/blob/master/LICENSE).  © Arkit Vora
-
-
