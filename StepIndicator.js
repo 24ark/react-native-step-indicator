@@ -67,6 +67,11 @@ export default class StepIndicator extends Component {
     }
   }
 
+  componentDidUpdate() {
+    this.onCurrentPositionChanged(this.props.currentPosition);
+
+  }
+
   renderProgressBarBackground = () => {
     const { stepCount, direction } = this.props;
     let progressBarBackgroundStyle;
@@ -239,7 +244,11 @@ export default class StepIndicator extends Component {
     }
 
     onCurrentPositionChanged = (newPosition) => {
-      this.animateProgress(newPosition);
+      const { stepCount } = this.props
+
+      if(newPosition <= stepCount-1) {
+        this.animateProgress(newPosition);
+      }
     }
 
     animateProgress = (position) => {
@@ -248,21 +257,21 @@ export default class StepIndicator extends Component {
       this.sizeAnim.setValue(this.customStyles.stepIndicatorSize);
       this.borderRadiusAnim.setValue(this.customStyles.stepIndicatorSize/2);
       Animated.sequence([
+        Animated.timing(
+          this.progressAnim,
+          {toValue: animateToPosition,duration:200}
+        ),
+        Animated.parallel([
           Animated.timing(
-            this.progressAnim,
-            {toValue: animateToPosition,duration:200}
+            this.sizeAnim,
+            {toValue: this.customStyles.currentStepIndicatorSize, duration:100}
           ),
-          Animated.parallel([
-            Animated.timing(
-              this.sizeAnim,
-              {toValue: this.customStyles.currentStepIndicatorSize, duration:100}
-            ),
-            Animated.timing(
-              this.borderRadiusAnim,
-              {toValue: this.customStyles.currentStepIndicatorSize/2, duration:100}
-            )
-          ])
-        ]).start();
+          Animated.timing(
+            this.borderRadiusAnim,
+            {toValue: this.customStyles.currentStepIndicatorSize/2, duration:100}
+          )
+        ])
+      ]).start();
     }
 
   }
