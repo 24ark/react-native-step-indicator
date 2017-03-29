@@ -22,7 +22,7 @@ $ react-native run-android   // For Android
 ```
 
 ### Installation
-```npm install react-native-step-indicator --save```
+``npm install react-native-step-indicator --save``
 
 ### Usage
 ```javascript
@@ -80,7 +80,7 @@ onPageChange(position){
 
 | Name | Type | Description | Default
 | ------------ | ------------- | ------------ |------------ |------------ |
-| ```currentPosition``` | Number  | Current position in steps | 0
+| `currentPosition` | Number  | Current position in steps | 0
 | ```stepCount``` | Number  | Number of steps | 5
 | ```direction``` | String  | Orientation(i.e. horizontal,vertical) | horizontal
 | ```customStyles``` | Object  | Custom styling | {}
