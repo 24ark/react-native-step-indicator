@@ -1,5 +1,5 @@
 
-import React, { Component,PropTypes } from 'react';
+import React, { PureComponent,PropTypes } from 'react';
 import { View,Text,StyleSheet, Animated } from 'react-native';
 
 const STEP_STATUS = {
@@ -8,7 +8,7 @@ const STEP_STATUS = {
   UNFINISHED:'unfinished'
 }
 
-export default class StepIndicator extends Component {
+export default class StepIndicator extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -53,8 +53,8 @@ export default class StepIndicator extends Component {
     const { labels, direction } = this.props;
     return (
       <View style={[styles.container, direction === 'vertical' ? {flexDirection: 'row', flex:1} : {flexDirection: 'column'}]}>
-        {this.renderProgressBarBackground()}
-        {this.renderProgressBar()}
+        {this.state.width !== 0 && this.state.width !== 0 && this.renderProgressBarBackground()}
+        {this.state.width !== 0 && this.state.width !== 0 && this.renderProgressBar()}
         {this.renderStepIndicator()}
         {labels && this.renderStepLabels()}
       </View>
@@ -65,11 +65,6 @@ export default class StepIndicator extends Component {
     if(nextProps.currentPosition !== this.props.currentPosition) {
       this.onCurrentPositionChanged(nextProps.currentPosition);
     }
-  }
-
-  componentDidUpdate() {
-    this.onCurrentPositionChanged(this.props.currentPosition);
-
   }
 
   renderProgressBarBackground = () => {
@@ -99,10 +94,10 @@ export default class StepIndicator extends Component {
       <View
         onLayout={(event) => {
           if(direction === 'vertical') {
-            this.setState({progressBarSize: event.nativeEvent.layout.height})
+            this.setState({progressBarSize: event.nativeEvent.layout.height} , () => {this.onCurrentPositionChanged(this.props.currentPosition)})
           }
           else {
-            this.setState({progressBarSize: event.nativeEvent.layout.width})
+            this.setState({progressBarSize: event.nativeEvent.layout.width} , () => {this.onCurrentPositionChanged(this.props.currentPosition)})
           }
         }}
         style={progressBarBackgroundStyle}/>
