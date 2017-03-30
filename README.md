@@ -79,7 +79,7 @@ onPageChange(position){
 ### Properties
 
 | Name | Type | Description | Default
-| ------------ | ------------- | ------------ |------------ |------------ |
+| ------------ | ------------- | ------------ |------------ |
 | `currentPosition` | Number  | Current position in steps | 0
 | ```stepCount``` | Number  | Number of steps | 5
 | ```direction``` | String  | Orientation(i.e. horizontal,vertical) | horizontal
@@ -89,7 +89,7 @@ onPageChange(position){
 ### Custom Styles
 
 | Name | Type | Default
-| ------------ | ------------ |------------ |------------ |
+| ------------ | ------------ |------------ |
 | ```stepIndicatorSize``` | Number  | 30
 | ```currentStepIndicatorSize``` | Number  | 40
 | ```separatorStrokeWidth``` | Number  | 3
