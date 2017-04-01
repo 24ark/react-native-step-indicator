@@ -238,16 +238,11 @@ export default class StepIndicator extends PureComponent {
       }
     }
 
-    onCurrentPositionChanged = (newPosition) => {
-      const { stepCount } = this.props
-
-      if(newPosition <= stepCount-1) {
-        this.animateProgress(newPosition);
+    onCurrentPositionChanged = (position) => {
+      let { stepCount } = this.props
+      if(position > stepCount-1) {
+        position = stepCount-1;
       }
-    }
-
-    animateProgress = (position) => {
-      const { stepCount } = this.props
       const animateToPosition = (this.state.progressBarSize/ (stepCount - 1)) * position;
       this.sizeAnim.setValue(this.customStyles.stepIndicatorSize);
       this.borderRadiusAnim.setValue(this.customStyles.stepIndicatorSize/2);
