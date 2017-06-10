@@ -1,6 +1,6 @@
 
 import React, { PureComponent,PropTypes } from 'react';
-import { View,Text,StyleSheet, Animated } from 'react-native';
+import { View,Text,StyleSheet, Animated, TouchableWithoutFeedback } from 'react-native';
 
 const STEP_STATUS = {
   CURRENT:'current',
@@ -47,6 +47,12 @@ export default class StepIndicator extends PureComponent {
     this.progressAnim = new Animated.Value(0)
     this.sizeAnim = new Animated.Value(this.customStyles.stepIndicatorSize);
     this.borderRadiusAnim = new Animated.Value(this.customStyles.stepIndicatorSize/2);
+  }
+
+  stepPressed(position) {
+    if(this.props.onPress) {
+      this.props.onPress(position)
+    }
   }
 
   render() {
@@ -140,9 +146,12 @@ export default class StepIndicator extends PureComponent {
     const { labels, stepCount, direction } = this.props;
     for(let position = 0 ; position < stepCount ; position++) {
       steps.push(
-        <View key={position} style={[styles.stepContainer, direction === 'vertical' ? {flexDirection: 'column'} : {flexDirection: 'row'}]}>
-          {this.renderStep(position)}
-        </View>)
+        <TouchableWithoutFeedback key={position} onPress={() => this.stepPressed(position)}>
+          <View style={[styles.stepContainer, direction === 'vertical' ? {flexDirection: 'column'} : {flexDirection: 'row'}]}>
+            {this.renderStep(position)}
+          </View>
+        </TouchableWithoutFeedback>
+        )
       }
       return(
         <View onLayout={(event) => this.setState({width: event.nativeEvent.layout.width, height: event.nativeEvent.layout.height})} style={[styles.stepIndicatorContainer, direction === 'vertical' ? {flexDirection: 'column', width:this.customStyles.currentStepIndicatorSize} : {flexDirection: 'row', height:this.customStyles.currentStepIndicatorSize}]}>
@@ -309,7 +318,8 @@ export default class StepIndicator extends PureComponent {
     stepCount: PropTypes.number,
     customStyles: PropTypes.object,
     direction: PropTypes.oneOf(['vertical', 'horizontal']),
-    labels: PropTypes.array
+    labels: PropTypes.array,
+    onPress: PropTypes.func
   };
 
   StepIndicator.defaultProps = {

@@ -85,6 +85,7 @@ onPageChange(position){
 | ```direction``` | String  | Orientation(i.e. horizontal,vertical) | horizontal
 | ```customStyles``` | Object  | Custom styling | {}
 | ```labels``` | Array  | Labels for each step | null
+| `onPress` | Function (position: Number) | Function called when a step is pressed | null 
 
 ### Custom Styles
 
