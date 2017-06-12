@@ -239,6 +239,15 @@ interface StepIndicatorProps {
    * @memberof StepIndicatorProps
    */
   labels?: string[]
+
+  /**
+   * Callback fired when tapping on a step
+   * 
+   * @param {number} step 
+   * 
+   * @memberof StepIndicatorProps
+   */
+  onPress?(step: number): void
 }
 
 export default class StepIndicator extends React.Component<StepIndicatorProps, null> { }
