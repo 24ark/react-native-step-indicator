@@ -292,8 +292,7 @@ export default class StepIndicator extends PureComponent {
     step: {
       alignItems:'center',
       justifyContent:'center',
-      zIndex: 2,
-      elevation:3
+      zIndex: 2
     },
     stepContainer: {
       flex:1,
