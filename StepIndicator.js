@@ -76,11 +76,14 @@ export default class StepIndicator extends PureComponent {
   renderProgressBarBackground = () => {
     const { stepCount, direction } = this.props;
     let progressBarBackgroundStyle;
+    const leftHorizontal = this.customStyles.left ? this.customStyles.left : this.state.width/(2*stepCount)
+    const rightHorizontal = this.customStyles.right ? this.customStyles.right : this.state.width/(2*stepCount)
+    const leftVertical = this.customStyles.left ? this.customStyles.left : (this.state.width - this.customStyles.separatorStrokeWidth)/2
     if(direction === 'vertical') {
       progressBarBackgroundStyle = {
         backgroundColor:this.customStyles.separatorUnFinishedColor,
         position:'absolute',
-        left:(this.state.width - this.customStyles.separatorStrokeWidth)/2,
+        left:leftVertical,
         top:this.state.height/(2*stepCount),
         bottom:this.state.height/(2*stepCount),
         width:this.customStyles.separatorStrokeWidth
@@ -91,8 +94,8 @@ export default class StepIndicator extends PureComponent {
         backgroundColor:this.customStyles.separatorUnFinishedColor,
         position:'absolute',
         top:(this.state.height - this.customStyles.separatorStrokeWidth)/2,
-        left:this.state.width/(2*stepCount),
-        right:this.state.width/(2*stepCount),
+        left: leftHorizontal,
+        right: rightHorizontal,
         height:this.customStyles.separatorStrokeWidth
       }
     }
