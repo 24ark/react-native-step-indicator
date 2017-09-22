@@ -179,7 +179,7 @@ export default class StepIndicator extends PureComponent {
       });
 
       return(
-        <View style={[styles.stepLabelsContainer, direction === 'vertical' ? {flexDirection: 'column', paddingHorizontal:4} : {flexDirection: 'row', paddingVertical:4}]}>
+        <View style={[styles.stepLabelsContainer, direction === 'vertical' ? {flexDirection: 'column', paddingHorizontal: 4, flexBasis: 'auto', flexGrow: 1 } : {flexDirection: 'row', paddingVertical:4}]}>
           {labelViews}
         </View>
       )
