@@ -1,6 +1,5 @@
-
-import React, { PureComponent,PropTypes } from 'react';
-import { View,Text,StyleSheet, Animated, TouchableWithoutFeedback } from 'react-native';
+import { Animated, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import React, { PropTypes, PureComponent } from 'react';
 
 const STEP_STATUS = {
   CURRENT:'current',
@@ -164,10 +163,14 @@ export default class StepIndicator extends PureComponent {
       const { labels, direction, currentPosition } = this.props;
       var labelViews = labels.map((label,index) => {
         const selectedStepLabelStyle = index === currentPosition ? { color: this.customStyles.currentStepLabelColor } : { color: this.customStyles.labelColor }
+        const customLabelStyle = { fontSize: this.customStyles.labelSize }
+        if(this.customStyles.labelFontFamily) {
+          customLabelStyle.fontFamily = this.customStyles.labelFontFamily
+        }
         return (
           <TouchableWithoutFeedback style={styles.stepLabelItem} key={index} onPress={() => this.stepPressed(index)}>
             <View style={styles.stepLabelItem}>
-              <Text style={[styles.stepLabel,selectedStepLabelStyle , { fontSize: this.customStyles.labelSize }]}>
+              <Text style={[styles.stepLabel,selectedStepLabelStyle , customLabelStyle]}>
                 {label}
               </Text>
             </View>

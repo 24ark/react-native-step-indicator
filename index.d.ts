@@ -194,6 +194,15 @@ interface StepIndicatorStyles {
    * @memberof StepIndicatorStyles
    */
   labelSize?: number
+
+  /**
+   * Custom Font Family for the labels
+   * 
+   * @default 
+   * @type {string}
+   * @memberof StepIndicatorStyles
+   */
+  labelFontFamily?: string
 }
 
 interface StepIndicatorProps {
