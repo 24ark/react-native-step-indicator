@@ -291,8 +291,9 @@ export default class StepIndicator extends PureComponent {
       backgroundColor:'transparent'
     },
     stepLabelsContainer: {
-      alignItems:'center',
-      justifyContent:'space-around'
+      alignItems:'flex-start',
+      justifyContent:'space-around',
+      marginLeft: 30
     },
     step: {
       alignItems:'center',
