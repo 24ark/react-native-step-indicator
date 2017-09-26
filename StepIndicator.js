@@ -176,7 +176,11 @@ export default class StepIndicator extends PureComponent {
                 </Text>
               </View>
             </TouchableWithoutFeedback>
-            {(typeof item !== 'string') && item.extra}
+            {
+              (typeof item !== 'string') && (
+                <View style={styles.stepExtra}>{item.extra}</View>
+              )
+            }
           </View>
         )
       });
@@ -317,12 +321,18 @@ export default class StepIndicator extends PureComponent {
     stepLabelItem: {
       flex:1,
       alignItems:'flex-start',
-      justifyContent:'center'
+      justifyContent:'center',
+      marginTop: 3,
+      marginBottom: 3
     },
     stepLabelWrapper: {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-around'
+    },
+    stepExtra: {
+      justifyContent: 'center',
+      alignItems: 'center'
     }
   });
 
