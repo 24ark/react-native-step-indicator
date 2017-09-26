@@ -161,20 +161,23 @@ export default class StepIndicator extends PureComponent {
 
     renderStepLabels = () => {
       const { labels, direction, currentPosition } = this.props;
-      var labelViews = labels.map((label,index) => {
+      var labelViews = labels.map((item, index) => {
         const selectedStepLabelStyle = index === currentPosition ? { color: this.customStyles.currentStepLabelColor } : { color: this.customStyles.labelColor }
         const customLabelStyle = { fontSize: this.customStyles.labelSize }
         if(this.customStyles.labelFontFamily) {
           customLabelStyle.fontFamily = this.customStyles.labelFontFamily
         }
         return (
-          <TouchableWithoutFeedback style={styles.stepLabelItem} key={index} onPress={() => this.stepPressed(index)}>
-            <View style={styles.stepLabelItem}>
-              <Text style={[styles.stepLabel,selectedStepLabelStyle , customLabelStyle]}>
-                {label}
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <View key={index} style={styles.stepLabelWrapper}>
+            <TouchableWithoutFeedback style={styles.stepLabelItem} onPress={() => this.stepPressed(index)}>
+              <View style={styles.stepLabelItem}>
+                <Text style={[styles.stepLabel,selectedStepLabelStyle , customLabelStyle]}>
+                  {(typeof item === 'string') ? item : item.text}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+            {(typeof item !== 'string') && item.extra}
+          </View>
         )
       });
 
@@ -313,8 +316,13 @@ export default class StepIndicator extends PureComponent {
     },
     stepLabelItem: {
       flex:1,
-      alignItems:'center',
+      alignItems:'flex-start',
       justifyContent:'center'
+    },
+    stepLabelWrapper: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-around'
     }
   });
 
