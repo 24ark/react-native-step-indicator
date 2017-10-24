@@ -1,6 +1,7 @@
 
-import React, { PureComponent,PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 import { View,Text,StyleSheet, Animated, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
 
 const STEP_STATUS = {
   CURRENT:'current',
