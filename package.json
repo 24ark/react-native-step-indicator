@@ -1,6 +1,6 @@
 {
   "name": "react-native-step-indicator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A simple react-native implementation of step indicator widget compatible with the ViewPager and ListView",
   "main": "StepIndicator.js",
   "types": "index.d.ts",
