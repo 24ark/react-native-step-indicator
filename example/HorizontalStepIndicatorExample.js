@@ -28,8 +28,8 @@ const firstIndicatorStyles = {
 }
 
 const secondIndicatorStyles = {
-  stepIndicatorSize: 25,
-  currentStepIndicatorSize:30,
+  stepIndicatorSize: 30,
+  currentStepIndicatorSize:40,
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
   stepStrokeCurrentColor: '#fe7013',
@@ -83,23 +83,23 @@ const getStepIndicatorIconConfig = ({ position, stepStatus }) => {
     };
     switch (position) {
       case 0: {
-        iconConfig.name = 'feed';
+        iconConfig.name = 'shopping-cart';
         break;
       }
       case 1: {
-        iconConfig.name = 'edit';
+        iconConfig.name = 'location-on';
         break;
       }
       case 2: {
-        iconConfig.name = 'audience';
+        iconConfig.name = 'assessment';
         break;
       }
       case 3: {
-        iconConfig.name = 'task';
+        iconConfig.name = 'payment';
         break;
       }
       case 4: {
-        iconConfig.name = 'publish';
+        iconConfig.name = 'track-changes';
         break;
       }
       default: {
