@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView } from 'react-native';
+import { View, Text, StyleSheet, ListView, FlatList } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import dummyData from './data';
 
@@ -29,11 +29,10 @@ export default class VerticalStepIndicator extends Component {
   constructor() {
     super();
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(dummyData.data),
       currentPage:0
     };
+    this.viewabilityConfig = {itemVisiblePercentThreshold: 40}
   }
 
   render() {
@@ -48,27 +47,32 @@ export default class VerticalStepIndicator extends Component {
               labels={dummyData.data.map(item => item.title)}
               />
           </View>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderPage}
-            onChangeVisibleRows={this.getVisibleRows}
-            />
+          <FlatList
+            style={{flexGrow:1}}
+            data={dummyData.data}
+            renderItem={this.renderPage}
+            onViewableItemsChanged={this.onViewableItemsChanged}
+            viewabilityConfig={this.viewabilityConfig}
+          />
       </View>
     );
   }
 
   renderPage = (rowData) => {
+    const item = rowData.item
     return (
       <View style={styles.rowItem}>
-        <Text style={styles.title}>{rowData.title}</Text>
-        <Text style={styles.body}>{rowData.body}</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.body}>{item.body}</Text>
       </View>
     )
   }
 
-  getVisibleRows = (visibleRows) => {
-    const visibleRowNumbers = Object.keys(visibleRows.s1).map((row) => parseInt(row));
-    this.setState({currentPage:visibleRowNumbers[0]})
+  onViewableItemsChanged = ({ viewableItems, changed }) => {
+      const visibleItemsCount = viewableItems.length;
+      if(visibleItemsCount != 0) {
+      this.setState({currentPage:viewableItems[visibleItemsCount-1].index})
+    };
   }
 }
 
