@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { AppRegistry,StyleSheet,View, Text } from 'react-native';
 import ViewPager from 'react-native-viewpager';
 import StepIndicator from 'react-native-step-indicator';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+
 const PAGES = ['Page 1','Page 2','Page 3','Page 4','Page 5'];
 
 const firstIndicatorStyles = {
@@ -72,6 +74,40 @@ const thirdIndicatorStyles = {
   currentStepLabelColor: '#7eaec4'
 }
 
+const getStepIndicatorIconConfig = ({ position, stepStatus }) => {
+    const iconConfig = {
+      name: 'feed',
+      color: stepStatus === 'finished' ? '#ffffff' : '#fe7013',
+      size: 15,
+    };
+    switch (position) {
+      case 0: {
+        iconConfig.name = 'feed';
+        break;
+      }
+      case 1: {
+        iconConfig.name = 'edit';
+        break;
+      }
+      case 2: {
+        iconConfig.name = 'audience';
+        break;
+      }
+      case 3: {
+        iconConfig.name = 'task';
+        break;
+      }
+      case 4: {
+        iconConfig.name = 'publish';
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+    return iconConfig;
+  };
+
 export default class App extends Component {
 
   constructor() {
@@ -92,7 +128,7 @@ export default class App extends Component {
           <StepIndicator customStyles={firstIndicatorStyles} currentPosition={this.state.currentPage} labels={["Account","Profile","Band","Membership","Dashboard"]} />
         </View>
         <View style={styles.stepIndicator}>
-          <StepIndicator customStyles={secondIndicatorStyles} currentPosition={this.state.currentPage} labels={["Cart","Delivery Address","Order Summary","Payment Method","Track"]} />
+          <StepIndicator renderStepIndicator={this.renderStepIndicator} customStyles={secondIndicatorStyles} currentPosition={this.state.currentPage} labels={["Cart","Delivery Address","Order Summary","Payment Method","Track"]} />
         </View>
         <View style={styles.stepIndicator}>
           <StepIndicator stepCount={4} customStyles={thirdIndicatorStyles} currentPosition={this.state.currentPage} labels={["Approval","Processing","Shipping","Delivery"]} />
@@ -111,6 +147,10 @@ export default class App extends Component {
       <Text>{data}</Text>
     </View>)
   }
+
+  renderStepIndicator = params => (
+    <MaterialIcon {...getStepIndicatorIconConfig(params)} />
+  );
 }
 
 const styles = StyleSheet.create({
