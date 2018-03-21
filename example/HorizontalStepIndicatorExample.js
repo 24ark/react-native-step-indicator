@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry,StyleSheet,View, Text } from 'react-native';
-import ViewPager from 'react-native-viewpager';
+import { ViewPager } from 'rn-viewpager';
+
 import StepIndicator from 'react-native-step-indicator';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
@@ -112,12 +113,16 @@ export default class App extends Component {
 
   constructor() {
     super();
-    var dataSource = new ViewPager.DataSource({
-      pageHasChanged: (p1, p2) => p1 !== p2,
-    });
     this.state = {
-      dataSource: dataSource.cloneWithPages(PAGES),
       currentPage:0
+    }
+  }
+
+  componentWillReceiveProps(nextProps,nextState) {
+    if(nextState.currentPage != this.state.currentPage) {
+      if(this.viewPager) {
+        this.viewPager.setPage(nextState.currentPage)
+      }
     }
   }
 
@@ -134,10 +139,12 @@ export default class App extends Component {
           <StepIndicator stepCount={4} customStyles={thirdIndicatorStyles} currentPosition={this.state.currentPage} labels={["Approval","Processing","Shipping","Delivery"]} />
         </View>
         <ViewPager
-          dataSource={this.state.dataSource}
-          renderPage={this.renderViewPagerPage}
-          onChangePage={(page) => {this.setState({currentPage:page})}}
-          />
+          style={{flexGrow:1}}
+          ref={(viewPager) => {this.viewPager = viewPager}}
+          onPageSelected={(page) => {this.setState({currentPage:page.position})}}
+          >
+            {PAGES.map((page) => this.renderViewPagerPage(page))}
+          </ViewPager>
       </View>
     );
   }
