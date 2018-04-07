@@ -250,4 +250,4 @@ interface StepIndicatorProps {
   onPress?(step: number): void
 }
 
-export default class StepIndicator extends React.Component<StepIndicatorProps, null> { }
+export default class StepIndicator extends React.Component<StepIndicatorProps, {}> { }
