@@ -41,6 +41,7 @@ export default class StepIndicator extends PureComponent {
       stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)',
       labelColor: '#000000',
       labelSize: 13,
+      labelAlign: 'center',
       currentStepLabelColor: '#4aae4f'
     };
 
@@ -177,7 +178,10 @@ export default class StepIndicator extends PureComponent {
       });
 
       return(
-        <View style={[styles.stepLabelsContainer, direction === 'vertical' ? {flexDirection: 'column', paddingHorizontal:4} : {flexDirection: 'row', paddingVertical:4}]}>
+        <View style={[styles.stepLabelsContainer,
+          direction === 'vertical' ? {flexDirection: 'column', paddingHorizontal:4} : {flexDirection: 'row', paddingVertical:4},
+          {alignItems: this.customStyles.labelAlign}
+        ]}>
           {labelViews}
         </View>
       )
@@ -293,7 +297,6 @@ export default class StepIndicator extends PureComponent {
       backgroundColor:'transparent'
     },
     stepLabelsContainer: {
-      alignItems:'center',
       justifyContent:'space-around'
     },
     step: {

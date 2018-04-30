@@ -113,6 +113,7 @@ onPageChange(position){
 | ```labelColor``` | String  | '#000000'
 | ```currentStepLabelColor``` | String  | '#4aae4f'
 | ```labelSize``` | Number  | 13
+| ```labelAlign``` | String  | 'center'
 
 
 ### Contributing
