@@ -242,7 +242,7 @@ export default class StepIndicator extends PureComponent {
             renderStepIndicator ? renderStepIndicator({
           position,
           stepStatus: this.getStepStatus(position),
-        }) : <Text style={indicatorLabelStyle}>{ position + 1 }</Text>}
+        }) : <Text style={indicatorLabelStyle}>{ Number(position + 1) }</Text>}
         </Animated.View>
       );
     }
