@@ -1,7 +1,7 @@
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View,Text,StyleSheet, Animated, TouchableWithoutFeedback } from 'react-native';
+import { View,Text,StyleSheet, Animated, TouchableOpacity } from 'react-native';
+import DefaultStepLabel from './DefaultStepLabel';
 
 const STEP_STATUS = {
   CURRENT:'current',
@@ -49,6 +49,8 @@ export default class StepIndicator extends PureComponent {
     this.progressAnim = new Animated.Value(0)
     this.sizeAnim = new Animated.Value(this.state.customStyles.stepIndicatorSize);
     this.borderRadiusAnim = new Animated.Value(this.state.customStyles.stepIndicatorSize/2);
+
+    this.stepPressed = this.stepPressed.bind(this);
   }
 
   stepPressed(position) {
@@ -153,11 +155,11 @@ export default class StepIndicator extends PureComponent {
     const { labels, stepCount, direction } = this.props;
     for(let position = 0 ; position < stepCount ; position++) {
       steps.push(
-        <TouchableWithoutFeedback key={position} onPress={() => this.stepPressed(position)}>
+        <TouchableOpacity key={position} onPress={() => this.stepPressed(position)}>
           <View style={[styles.stepContainer, direction === 'vertical' ? {flexDirection: 'column'} : {flexDirection: 'row'}]}>
             {this.renderStep(position)}
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         )
       }
       return(
@@ -169,16 +171,20 @@ export default class StepIndicator extends PureComponent {
 
     renderStepLabels = () => {
       const { labels, direction, currentPosition } = this.props;
+      const Label = this.props.customLabel;
       var labelViews = labels.map((label,index) => {
-        const selectedStepLabelStyle = index === currentPosition ? { color: this.state.customStyles.currentStepLabelColor } : { color: this.state.customStyles.labelColor }
+        const selectedLabel = index == currentPosition;
+        const selectedStepLabelStyle = selectedLabel ? { color: this.state.customStyles.currentStepLabelColor } : { color: this.state.customStyles.labelColor }
         return (
-          <TouchableWithoutFeedback style={styles.stepLabelItem} key={index} onPress={() => this.stepPressed(index)}>
-            <View style={styles.stepLabelItem}>
-              <Text style={[styles.stepLabel,selectedStepLabelStyle , { fontSize: this.state.customStyles.labelSize }]}>
-                {label}
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <Label
+            key={index}
+            index={index}
+            label={label}
+            onLabelPress={this.stepPressed}
+            selectedLabel={selectedLabel}
+            selectedStepLabelStyle={selectedStepLabelStyle}
+            customStyles={this.state.customStyles}
+          />
         )
       });
 
@@ -236,13 +242,21 @@ export default class StepIndicator extends PureComponent {
         default:
       }
 
+      // Remove the indicator label if the font is set to 0
       return (
         <Animated.View key={'step-indicator'} style={[styles.step , stepStyle ]}>
           {
-            renderStepIndicator ? renderStepIndicator({
-          position,
-          stepStatus: this.getStepStatus(position),
-        }) : <Text style={indicatorLabelStyle}>{ position + 1 }</Text>}
+            renderStepIndicator ?
+              renderStepIndicator({
+                position,
+                stepStatus: this.getStepStatus(position),
+              }) :
+              (
+                this.state.customStyles.stepIndicatorLabelFontSize ?
+                  <Text style={indicatorLabelStyle}>{ position + 1 }</Text> :
+                  null
+              )
+          }
         </Animated.View>
       );
     }
@@ -313,16 +327,6 @@ export default class StepIndicator extends PureComponent {
       alignItems:'center',
       justifyContent:'center'
     },
-    stepLabel: {
-      fontSize:12,
-      textAlign:'center',
-      fontWeight:'500'
-    },
-    stepLabelItem: {
-      flex:1,
-      alignItems:'center',
-      justifyContent:'center'
-    }
   });
 
   StepIndicator.propTypes = {
@@ -330,6 +334,7 @@ export default class StepIndicator extends PureComponent {
     stepCount: PropTypes.number,
     customStyles: PropTypes.object,
     direction: PropTypes.oneOf(['vertical', 'horizontal']),
+    customLabel: PropTypes.func,
     labels: PropTypes.array,
     onPress: PropTypes.func,
     renderStepIndicator: PropTypes.func,
@@ -339,5 +344,6 @@ export default class StepIndicator extends PureComponent {
     currentPosition: 0,
     stepCount: 5,
     customStyles: {},
-    direction: 'horizontal'
+    direction: 'horizontal',
+    customLabel: DefaultStepLabel,
   };
