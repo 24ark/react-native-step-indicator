@@ -9,7 +9,7 @@ const STEP_STATUS = {
   UNFINISHED:'unfinished'
 }
 
-export default class StepIndicator extends PureComponent {
+export default class StepIndicator extends Component {
 
   constructor(props) {
     super(props);
