@@ -171,10 +171,11 @@ export default class StepIndicator extends PureComponent {
       const { labels, direction, currentPosition } = this.props;
       var labelViews = labels.map((label,index) => {
         const selectedStepLabelStyle = index === currentPosition ? { color: this.state.customStyles.currentStepLabelColor } : { color: this.state.customStyles.labelColor }
+        const fontFamily = this.state.customStyles.labelFontFamily ? { fontFamily: this.state.customStyles.labelFontFamily } : undefined
         return (
           <TouchableWithoutFeedback style={styles.stepLabelItem} key={index} onPress={() => this.stepPressed(index)}>
             <View style={styles.stepLabelItem}>
-              <Text style={[styles.stepLabel,selectedStepLabelStyle , { fontSize: this.state.customStyles.labelSize }]}>
+              <Text style={[styles.stepLabel, selectedStepLabelStyle , fontFamily { fontSize: this.state.customStyles.labelSize }]}>
                 {label}
               </Text>
             </View>
