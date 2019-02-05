@@ -1,7 +1,7 @@
 {
   "name": "react-native-step-indicator",
-  "version": "0.0.7",
-  "description": "A simple react-native implementation of step indicator widget compatible with the ViewPager and ListView",
+  "version": "0.0.9",
+  "description": "A simple react-native implementation of step indicator widget compatible with the ViewPager, ListView and Flatlist",
   "main": "StepIndicator.js",
   "types": "index.d.ts",
   "directories": {
@@ -25,7 +25,7 @@
     "listview"
   ],
   "author": "Arkit Vora",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/24ark/react-native-step-indicator/issues"
   },

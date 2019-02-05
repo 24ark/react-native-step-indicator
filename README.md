@@ -85,7 +85,8 @@ onPageChange(position){
 | ```direction``` | String  | Orientation(i.e. horizontal,vertical) | horizontal
 | ```customStyles``` | Object  | Custom styling | {}
 | ```labels``` | Array  | Labels for each step | null
-| `onPress` | Function (position: Number) | Function called when a step is pressed | null 
+| `onPress` | Function (position: Number) | Function called when a step is pressed | null
+| `renderStepIndicator` | Function (position: Number, stepStatus: String) | Use this to render custom content inside step | null 
 
 ### Custom Styles
 
@@ -94,6 +95,8 @@ onPageChange(position){
 | ```stepIndicatorSize``` | Number  | 30
 | ```currentStepIndicatorSize``` | Number  | 40
 | ```separatorStrokeWidth``` | Number  | 3
+| ```separatorStrokeUnfinishedWidth``` | Number  | 0
+| ```separatorStrokeFinishedWidth``` | Number  | 0
 | ```stepStrokeWidth``` | Number  | 0
 | ```currentStepStrokeWidth``` | Number  | 5
 | ```stepStrokeCurrentColor``` | String  | '#4aae4f'
@@ -112,6 +115,7 @@ onPageChange(position){
 | ```labelColor``` | String  | '#000000'
 | ```currentStepLabelColor``` | String  | '#4aae4f'
 | ```labelSize``` | Number  | 13
+| ```labelAlign``` | String  | 'center'
 
 
 ### Contributing

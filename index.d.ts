@@ -194,6 +194,16 @@ interface StepIndicatorStyles {
    * @memberof StepIndicatorStyles
    */
   labelSize?: number
+
+  /**
+   * Label alignment
+   *
+   * @default 'center
+   * @type {string}
+   * @memberof StepIndicatorStyles
+   *
+   */
+  labelAlign?: string
 }
 
 interface StepIndicatorProps {
@@ -250,4 +260,4 @@ interface StepIndicatorProps {
   onPress?(step: number): void
 }
 
-export default class StepIndicator extends React.Component<StepIndicatorProps, null> { }
+export default class StepIndicator extends React.Component<StepIndicatorProps, {}> { }
