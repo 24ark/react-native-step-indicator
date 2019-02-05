@@ -18,6 +18,8 @@ export default class StepIndicator extends PureComponent {
       stepIndicatorSize: 30,
       currentStepIndicatorSize: 40,
       separatorStrokeWidth: 3,
+      separatorStrokeUnfinishedWidth: 0,
+      separatorStrokeFinishedWidth: 0,
       currentStepStrokeWidth: 5,
       stepStrokeWidth: 0,
       stepStrokeCurrentColor: '#4aae4f',
@@ -90,7 +92,9 @@ export default class StepIndicator extends PureComponent {
         left:(this.state.width - this.state.customStyles.separatorStrokeWidth)/2,
         top:this.state.height/(2*stepCount),
         bottom:this.state.height/(2*stepCount),
-        width:this.state.customStyles.separatorStrokeWidth
+        width: this.state.customStyles.separatorStrokeUnfinishedWidth == 0 ? 
+          this.state.customStyles.separatorStrokeWidth :
+          this.state.customStyles.separatorStrokeUnfinishedWidth
       }
     }
     else {
@@ -100,7 +104,9 @@ export default class StepIndicator extends PureComponent {
         top:(this.state.height - this.state.customStyles.separatorStrokeWidth)/2,
         left:this.state.width/(2*stepCount),
         right:this.state.width/(2*stepCount),
-        height:this.state.customStyles.separatorStrokeWidth
+        height: this.state.customStyles.separatorStrokeUnfinishedWidth == 0 ? 
+          this.state.customStyles.separatorStrokeWidth :
+          this.state.customStyles.separatorStrokeUnfinishedWidth
       }
     }
     return(
@@ -127,7 +133,9 @@ export default class StepIndicator extends PureComponent {
         left:(this.state.width - this.state.customStyles.separatorStrokeWidth)/2,
         top:this.state.height/(2*stepCount),
         bottom:this.state.height/(2*stepCount),
-        width:this.state.customStyles.separatorStrokeWidth,
+        width:this.state.customStyles.separatorStrokeFinishedWidth == 0 ? 
+          this.state.customStyles.separatorStrokeWidth :
+          this.state.customStyles.separatorStrokeFinishedWidth,
         height:this.progressAnim
       }
     }
@@ -138,7 +146,9 @@ export default class StepIndicator extends PureComponent {
         top:(this.state.height - this.state.customStyles.separatorStrokeWidth)/2,
         left:this.state.width/(2*stepCount),
         right:this.state.width/(2*stepCount),
-        height:this.state.customStyles.separatorStrokeWidth,
+        height:this.state.customStyles.separatorStrokeFinishedWidth == 0 ? 
+          this.state.customStyles.separatorStrokeWidth :
+          this.state.customStyles.separatorStrokeFinishedWidth,
         width:this.progressAnim
       }
     }
