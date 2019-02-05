@@ -256,7 +256,7 @@ export default class StepIndicator extends Component {
             renderStepIndicator ? renderStepIndicator({
           position,
           stepStatus: this.getStepStatus(position),
-        }) : <Text style={indicatorLabelStyle}>{ position + 1 }</Text>}
+        }) : <Text style={indicatorLabelStyle}>{ `${position + 1}` }</Text>}
         </Animated.View>
       );
     }
