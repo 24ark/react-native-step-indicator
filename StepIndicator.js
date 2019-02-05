@@ -37,6 +37,7 @@ export default class StepIndicator extends Component {
       stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)',
       labelColor: '#000000',
       labelSize: 13,
+      labelAlign: 'center',
       currentStepLabelColor: '#4aae4f'
     };
     const customStyles = Object.assign(defaultStyles, props.customStyles);
@@ -193,7 +194,10 @@ export default class StepIndicator extends Component {
       });
 
       return(
-        <View style={[styles.stepLabelsContainer, direction === 'vertical' ? {flexDirection: 'column', paddingHorizontal:4} : {flexDirection: 'row', paddingVertical:4}]}>
+        <View style={[styles.stepLabelsContainer,
+          direction === 'vertical' ? {flexDirection: 'column', paddingHorizontal:4} : {flexDirection: 'row', paddingVertical:4},
+          {alignItems: this.customStyles.labelAlign}
+        ]}>
           {labelViews}
         </View>
       )
@@ -309,7 +313,6 @@ export default class StepIndicator extends Component {
       backgroundColor:'transparent'
     },
     stepLabelsContainer: {
-      alignItems:'center',
       justifyContent:'space-around'
     },
     step: {

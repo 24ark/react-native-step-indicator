@@ -194,6 +194,16 @@ interface StepIndicatorStyles {
    * @memberof StepIndicatorStyles
    */
   labelSize?: number
+
+  /**
+   * Label alignment
+   *
+   * @default 'center
+   * @type {string}
+   * @memberof StepIndicatorStyles
+   *
+   */
+  labelAlign?: string
 }
 
 interface StepIndicatorProps {
