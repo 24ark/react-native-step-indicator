@@ -13,7 +13,7 @@
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.2",
     "react-native-paged-scroll-view": "^2.0.4",
-    "react-native-step-indicator": "file:../",
+    "react-native-step-indicator": "../",
     "react-native-vector-icons": "^4.5.0",
     "rn-viewpager": "^1.2.9"
   },
