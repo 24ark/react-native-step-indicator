@@ -1,5 +1,5 @@
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View,Text,StyleSheet, Animated, TouchableWithoutFeedback } from 'react-native';
 
@@ -9,7 +9,7 @@ const STEP_STATUS = {
   UNFINISHED:'unfinished'
 }
 
-export default class StepIndicator extends PureComponent {
+export default class StepIndicator extends Component {
 
   constructor(props) {
     super(props);
