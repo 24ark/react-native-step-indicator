@@ -248,6 +248,17 @@ interface StepIndicatorProps {
    * @memberof StepIndicatorProps
    */
   onPress?(step: number): void
+
+   /**
+   * Used to render custom content inside step at specified position
+   * 
+   * @param {number} position 
+   * @param {string} stepStatus 
+   * 
+   * @memberof StepIndicatorProps
+   */
+  renderStepIndicator?(args: { position: number, stepStatus: string }): React.ReactNode
+
 }
 
 export default class StepIndicator extends React.Component<StepIndicatorProps, null> { }
