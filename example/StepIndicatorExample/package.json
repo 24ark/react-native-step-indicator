@@ -1,0 +1,29 @@
+{
+  "name": "StepIndicatorExample",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "postinstall": "rm -rf node_modules/react-native-step-indicator/example",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.8.3",
+    "react-native": "0.59.3",
+    "react-native-paged-scroll-view": "^2.0.4",
+    "react-native-vector-icons": "^4.5.0",
+    "react-native-step-indicator": "../../",
+    "rn-viewpager": "^1.2.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "metro-react-native-babel-preset": "^0.53.1",
+    "react-test-renderer": "16.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
