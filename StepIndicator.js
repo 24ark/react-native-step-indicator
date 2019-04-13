@@ -255,7 +255,10 @@ export default class StepIndicator extends Component {
               style={[
                 styles.stepLabel,
                 selectedStepLabelStyle,
-                { fontSize: this.state.customStyles.labelSize }
+                {
+                  fontSize: this.state.customStyles.labelSize,
+                  fontFamily: this.state.customStyles.labelFontFamily
+                }
               ]}
             >
               {label}
