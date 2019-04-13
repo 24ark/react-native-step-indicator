@@ -134,6 +134,7 @@ export default class App extends Component {
             customStyles={firstIndicatorStyles}
             currentPosition={this.state.currentPage}
             labels={['Account', 'Profile', 'Band', 'Membership', 'Dashboard']}
+            onPress={this.onStepPress}
           />
         </View>
         <View style={styles.stepIndicator}>
@@ -141,6 +142,7 @@ export default class App extends Component {
             renderStepIndicator={this.renderStepIndicator}
             customStyles={secondIndicatorStyles}
             currentPosition={this.state.currentPage}
+            onPress={this.onStepPress}
             labels={[
               'Cart',
               'Delivery Address',
@@ -155,6 +157,7 @@ export default class App extends Component {
             stepCount={4}
             customStyles={thirdIndicatorStyles}
             currentPosition={this.state.currentPage}
+            onPress={this.onStepPress}
             labels={['Approval', 'Processing', 'Shipping', 'Delivery']}
           />
         </View>
@@ -171,6 +174,10 @@ export default class App extends Component {
         </ViewPager>
       </View>
     )
+  }
+
+  onStepPress = position => {
+    this.setState({ currentPage: position })
   }
 
   renderViewPagerPage = data => {
