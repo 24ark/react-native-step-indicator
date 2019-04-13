@@ -1,4 +1,3 @@
-.DS_Store
 node_modules/
 example/
 npm-debug.log
@@ -7,3 +6,5 @@ README.md
 .babelrc
 babelrc
 test/
+.DS_Store
+
