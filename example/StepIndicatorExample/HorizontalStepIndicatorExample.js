@@ -178,6 +178,7 @@ export default class App extends Component {
 
   onStepPress = position => {
     this.setState({ currentPage: position })
+    this.viewPager.setPage(position)
   }
 
   renderViewPagerPage = data => {
