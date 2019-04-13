@@ -198,12 +198,21 @@ interface StepIndicatorStyles {
   /**
    * Label alignment
    *
-   * @default 'center
+   * @default 'center'
    * @type {string}
    * @memberof StepIndicatorStyles
    *
    */
   labelAlign?: string
+
+  /**
+   * Label fontFamily for custom fonts
+   *
+   * @type {string}
+   * @memberof StepIndicatorStyles
+   *
+   */
+  labelFontFamily?: string
 }
 
 interface StepIndicatorProps {
@@ -259,15 +268,27 @@ interface StepIndicatorProps {
    */
   onPress?(step: number): void
 
-   /**
-   * Used to render custom content inside step at specified position
-   * 
-   * @param {number} position 
-   * @param {string} stepStatus 
-   * 
-   * @memberof StepIndicatorProps
-   */
+  /**
+  * Used to render custom content inside step at specified position
+  * 
+  * @param {number} position 
+  * @param {string} stepStatus 
+  * 
+  * @memberof StepIndicatorProps
+  */
   renderStepIndicator?(args: { position: number, stepStatus: string }): React.ReactNode
+
+  /**
+  * Use this to render custom label for each step
+  * 
+  * @param {number} position 
+  * @param {string} stepStatus 
+  * @param {string} label 
+  * @param {number} currentPosition 
+  * 
+  * @memberof StepIndicatorProps
+  */
+  renderLabel?(args: { position: number, stepStatus: string, label: string, currentPosition: number }): React.ReactNode
 
 }
 
