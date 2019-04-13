@@ -238,7 +238,7 @@ export default class StepIndicator extends Component {
   }
 
   renderStepLabels = () => {
-    const { labels, direction, currentPosition } = this.props
+    const { labels, direction, currentPosition, renderLabel } = this.props
     var labelViews = labels.map((label, index) => {
       const selectedStepLabelStyle =
         index === currentPosition
@@ -251,18 +251,27 @@ export default class StepIndicator extends Component {
           onPress={() => this.stepPressed(index)}
         >
           <View style={styles.stepLabelItem}>
-            <Text
-              style={[
-                styles.stepLabel,
-                selectedStepLabelStyle,
-                {
-                  fontSize: this.state.customStyles.labelSize,
-                  fontFamily: this.state.customStyles.labelFontFamily
-                }
-              ]}
-            >
-              {label}
-            </Text>
+            {renderLabel ? (
+              renderLabel({
+                position: index,
+                stepStatus: this.getStepStatus(index),
+                label,
+                currentPosition
+              })
+            ) : (
+              <Text
+                style={[
+                  styles.stepLabel,
+                  selectedStepLabelStyle,
+                  {
+                    fontSize: this.state.customStyles.labelSize,
+                    fontFamily: this.state.customStyles.labelFontFamily
+                  }
+                ]}
+              >
+                {label}
+              </Text>
+            )}
           </View>
         </TouchableWithoutFeedback>
       )
@@ -446,7 +455,8 @@ StepIndicator.propTypes = {
   direction: PropTypes.oneOf(['vertical', 'horizontal']),
   labels: PropTypes.array,
   onPress: PropTypes.func,
-  renderStepIndicator: PropTypes.func
+  renderStepIndicator: PropTypes.func,
+  renderLabel: PropTypes.func
 }
 
 StepIndicator.defaultProps = {

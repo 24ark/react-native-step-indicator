@@ -73,6 +73,7 @@ const thirdIndicatorStyles = {
   stepIndicatorLabelUnFinishedColor: 'transparent',
   labelColor: '#999999',
   labelSize: 13,
+  labelFontFamily: 'OpenSans-Italic',
   currentStepLabelColor: '#7eaec4'
 }
 
@@ -134,6 +135,7 @@ export default class App extends Component {
             customStyles={firstIndicatorStyles}
             currentPosition={this.state.currentPage}
             labels={['Account', 'Profile', 'Band', 'Membership', 'Dashboard']}
+            renderLabel={this.renderLabel}
             onPress={this.onStepPress}
           />
         </View>
@@ -192,6 +194,20 @@ export default class App extends Component {
   renderStepIndicator = params => (
     <MaterialIcon {...getStepIndicatorIconConfig(params)} />
   )
+
+  renderLabel = ({ position, stepStatus, label, currentPosition }) => {
+    return (
+      <Text
+        style={
+          position === currentPosition
+            ? styles.stepLabelSelected
+            : styles.stepLabel
+        }
+      >
+        {label}
+      </Text>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -206,5 +222,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  stepLabel: {
+    fontSize: 12,
+    textAlign: 'center',
+    fontWeight: '500',
+    color: '#999999'
+  },
+  stepLabelSelected: {
+    fontSize: 12,
+    textAlign: 'center',
+    fontWeight: '500',
+    color: '#4aae4f'
   }
 })

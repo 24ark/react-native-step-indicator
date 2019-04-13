@@ -87,6 +87,7 @@ onPageChange(position){
 | ```labels``` | Array  | Labels for each step | null
 | `onPress` | Function (position: Number) | Function called when a step is pressed | null
 | `renderStepIndicator` | Function (position: Number, stepStatus: String) | Use this to render custom content inside step | null 
+| `renderLabel` | Function (position: Number, stepStatus: String, label: String, currentPosition: Number) | Use this to render custom label for each step | null 
 
 ### Custom Styles
 
