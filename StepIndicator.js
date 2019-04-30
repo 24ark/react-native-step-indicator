@@ -313,7 +313,8 @@ export default class StepIndicator extends Component {
           borderColor: this.state.customStyles.stepStrokeCurrentColor,
           height: this.sizeAnim,
           width: this.sizeAnim,
-          borderRadius: this.borderRadiusAnim
+          borderRadius: this.borderRadiusAnim,
+          overflow:'hidden'
         }
         indicatorLabelStyle = {
           fontSize: this.state.customStyles.currentStepIndicatorLabelFontSize,
@@ -329,7 +330,8 @@ export default class StepIndicator extends Component {
           borderColor: this.state.customStyles.stepStrokeFinishedColor,
           height: this.state.customStyles.stepIndicatorSize,
           width: this.state.customStyles.stepIndicatorSize,
-          borderRadius: this.state.customStyles.stepIndicatorSize / 2
+          borderRadius: this.state.customStyles.stepIndicatorSize / 2,
+          overflow:'hidden'
         }
         indicatorLabelStyle = {
           fontSize: this.state.customStyles.stepIndicatorLabelFontSize,
@@ -345,7 +347,8 @@ export default class StepIndicator extends Component {
           borderColor: this.state.customStyles.stepStrokeUnFinishedColor,
           height: this.state.customStyles.stepIndicatorSize,
           width: this.state.customStyles.stepIndicatorSize,
-          borderRadius: this.state.customStyles.stepIndicatorSize / 2
+          borderRadius: this.state.customStyles.stepIndicatorSize / 2,
+          overflow:'hidden'
         }
         indicatorLabelStyle = {
           overflow: 'hidden',
