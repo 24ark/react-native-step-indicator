@@ -395,7 +395,7 @@ export default class StepIndicator extends Component {
     )
     Animated.sequence([
       Animated.timing(this.progressAnim, {
-        toValue: animateToPosition,
+        toValue: isNaN(animateToPosition)?0:animateToPosition,
         duration: 200
       }),
       Animated.parallel([
