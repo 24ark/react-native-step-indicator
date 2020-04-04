@@ -87,14 +87,14 @@ export default class StepIndicator extends Component {
     )
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.customStyles !== this.props.customStyles) {
+  componentDidUpdate (prevProps) {
+    if (prevProps.customStyles !== this.props.customStyles) {
       this.setState(state => ({
-        customStyles: Object.assign(state.customStyles, nextProps.customStyles)
+        customStyles: Object.assign(state.customStyles, this.props.customStyles)
       }))
     }
-    if (nextProps.currentPosition !== this.props.currentPosition) {
-      this.onCurrentPositionChanged(nextProps.currentPosition)
+    if (prevProps.currentPosition !== this.props.currentPosition) {
+      this.onCurrentPositionChanged(this.props.currentPosition)
     }
   }
 
@@ -396,16 +396,19 @@ export default class StepIndicator extends Component {
     Animated.sequence([
       Animated.timing(this.progressAnim, {
         toValue: animateToPosition,
-        duration: 200
+        duration: 200,
+        useNativeDriver: false
       }),
       Animated.parallel([
         Animated.timing(this.sizeAnim, {
           toValue: this.state.customStyles.currentStepIndicatorSize,
-          duration: 100
+          duration: 100,
+          useNativeDriver: false
         }),
         Animated.timing(this.borderRadiusAnim, {
           toValue: this.state.customStyles.currentStepIndicatorSize / 2,
-          duration: 100
+          duration: 100,
+          useNativeDriver: false
         })
       ])
     ]).start()
