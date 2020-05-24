@@ -1,0 +1,22 @@
+{
+  "name": "react-native-step-indicator-example",
+  "displayName": "StepIndicator Example",
+  "expo": {
+    "name": "react-native-step-indicator-example",
+    "slug": "react-native-step-indicator-example",
+    "description": "Example app for react-native-step-indicator",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
