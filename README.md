@@ -10,19 +10,22 @@ Features
   - Supports animation between steps
 
 
-![alt tag](art/HorizontalStepIndicator.gif) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![alt tag](art/VerticalStepIndicator.gif)
+![alt tag](https://raw.githubusercontent.com/24ark/react-native-step-indicator/master/art/HorizontalStepIndicator.gif) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![alt tag](https://raw.githubusercontent.com/24ark/react-native-step-indicator/master/art/VerticalStepIndicator.gif)
  [example/HorizontalStepIndicatorExample.js](example/HorizontalStepIndicatorExample.js)   &nbsp;&nbsp;&nbsp;&nbsp; [example/VerticalStepIndicatorExample.js](example/VerticalStepIndicatorExample.js)
 
 ### Example
 ```sh
-$ cd example
-$ npm i
-$ react-native run-ios   // For ios
-$ react-native run-android   // For Android
+$ yarn
+$ yarn example ios   // For ios
+$ yarn example android   // For Android
 ```
 
 ### Installation
 ``npm install react-native-step-indicator --save``
+
+or
+
+``yarn add react-native-step-indicator``
 
 ### Usage
 ```javascript
