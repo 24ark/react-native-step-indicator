@@ -102,6 +102,9 @@ const StepIndicator = ({
   const sizeAnim = React.useRef(
     new Animated.Value(customStyles.stepIndicatorSize)
   ).current;
+  const staleSizeAnim = React.useRef(
+    new Animated.Value(customStyles.stepIndicatorSize)
+  ).current;
   const borderRadiusAnim = React.useRef(
     new Animated.Value(customStyles.stepIndicatorSize / 2)
   ).current;
@@ -243,6 +246,9 @@ const StepIndicator = ({
   };
 
   const renderStepLabels = () => {
+    if (!labels || labels.length === 0) {
+      return;
+    }
     var labelViews = labels.map((label, index) => {
       const selectedStepLabelStyle =
         index === currentPosition
@@ -308,8 +314,10 @@ const StepIndicator = ({
           height: sizeAnim,
           width: sizeAnim,
           borderRadius: borderRadiusAnim,
+          overflow: 'hidden',
         };
         indicatorLabelStyle = {
+          overflow: 'hidden',
           fontSize: customStyles.currentStepIndicatorLabelFontSize,
           color: customStyles.stepIndicatorLabelCurrentColor,
         };
@@ -321,11 +329,13 @@ const StepIndicator = ({
           backgroundColor: customStyles.stepIndicatorFinishedColor,
           borderWidth: customStyles.stepStrokeWidth,
           borderColor: customStyles.stepStrokeFinishedColor,
-          height: customStyles.stepIndicatorSize,
-          width: customStyles.stepIndicatorSize,
+          height: staleSizeAnim,
+          width: staleSizeAnim,
           borderRadius: customStyles.stepIndicatorSize / 2,
+          overflow: 'hidden',
         };
         indicatorLabelStyle = {
+          overflow: 'hidden',
           fontSize: customStyles.stepIndicatorLabelFontSize,
           color: customStyles.stepIndicatorLabelFinishedColor,
         };
@@ -337,9 +347,10 @@ const StepIndicator = ({
           backgroundColor: customStyles.stepIndicatorUnFinishedColor,
           borderWidth: customStyles.stepStrokeWidth,
           borderColor: customStyles.stepStrokeUnFinishedColor,
-          height: customStyles.stepIndicatorSize,
-          width: customStyles.stepIndicatorSize,
+          height: staleSizeAnim,
+          width: staleSizeAnim,
           borderRadius: customStyles.stepIndicatorSize / 2,
+          overflow: 'hidden',
         };
         indicatorLabelStyle = {
           overflow: 'hidden',
@@ -381,10 +392,11 @@ const StepIndicator = ({
     }
     const animateToPosition = (progressBarSize / (stepCount - 1)) * position;
     sizeAnim.setValue(customStyles.stepIndicatorSize);
+    staleSizeAnim.setValue(customStyles.stepIndicatorSize);
     borderRadiusAnim.setValue(customStyles.stepIndicatorSize / 2);
     Animated.sequence([
       Animated.timing(progressAnim, {
-        toValue: animateToPosition,
+        toValue: isNaN(animateToPosition) ? 0 : animateToPosition,
         duration: 200,
         useNativeDriver: false,
       }),
@@ -426,13 +438,13 @@ const StepIndicator = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(1,0,0,0)',
   },
   stepIndicatorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(1,0,0,0)',
   },
   stepLabelsContainer: {
     justifyContent: 'space-around',
