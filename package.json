@@ -1,6 +1,6 @@
 {
   "name": "react-native-step-indicator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple react-native implementation of a step indicator widget compatible with ViewPager and Flatlist",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -83,7 +83,10 @@
     }
   },
   "eslintConfig": {
-    "extends": ["@react-native-community", "prettier"],
+    "extends": [
+      "@react-native-community",
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -97,7 +100,10 @@
       ]
     }
   },
-  "eslintIgnore": ["node_modules/", "lib/"],
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ],
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
@@ -125,6 +131,10 @@
   "@react-native-community/bob": {
     "source": "src",
     "output": "lib",
-    "targets": ["commonjs", "module", "typescript"]
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
   }
 }
