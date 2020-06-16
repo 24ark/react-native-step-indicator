@@ -1,6 +1,6 @@
 {
   "name": "react-native-step-indicator",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "A simple react-native implementation of a step indicator widget compatible with ViewPager and Flatlist",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -30,7 +30,12 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "react-component",
+    "step-indicator",
+    "viewpager",
+    "scrollview",
+    "listview"
   ],
   "repository": "https://github.com/24ark/react-native-step-indicator",
   "author": "Arkit Vora <arkitvora123@gmail.com> (https://github.com/24ark)",
@@ -78,10 +83,7 @@
     }
   },
   "eslintConfig": {
-    "extends": [
-      "@react-native-community",
-      "prettier"
-    ],
+    "extends": ["@react-native-community", "prettier"],
     "rules": {
       "prettier/prettier": [
         "error",
