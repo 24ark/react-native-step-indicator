@@ -11,7 +11,7 @@ Features
 
 
 ![alt tag](https://raw.githubusercontent.com/24ark/react-native-step-indicator/master/art/HorizontalStepIndicator.gif) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![alt tag](https://raw.githubusercontent.com/24ark/react-native-step-indicator/master/art/VerticalStepIndicator.gif)
- [example/src/HorizontalStepIndicatorExample.tsx](example/src/HorizontalStepIndicatorExample.tsx)   &nbsp;&nbsp;&nbsp;&nbsp; [example/src/VerticalStepIndicatorExample.tsx](example/src/VerticalStepIndicatorExample.tsx)
+ [example/src/HorizontalStepIndicator.tsx](example/src/HorizontalStepIndicator.tsx)   &nbsp;&nbsp;&nbsp;&nbsp; [example/src/VerticalStepIndicator.tsx](example/src/VerticalStepIndicator.tsx)
 
 ### Example
 ```sh
