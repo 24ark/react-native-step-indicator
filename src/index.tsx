@@ -49,6 +49,8 @@ interface DefaultStepIndicatorStyles {
     | undefined;
   currentStepLabelColor: string;
   labelFontFamily?: string;
+  finishedStepLabelColor: string;
+  stepIndicatorLabelFontFamily: string;
 }
 
 const defaultStyles: DefaultStepIndicatorStyles = {
@@ -251,7 +253,9 @@ const StepIndicator = ({
     }
     var labelViews = labels.map((label, index) => {
       const selectedStepLabelStyle =
-        index === currentPosition
+        index < currentPosition
+          ? { color: customStyles.finishedStepLabelColor }
+          : index === currentPosition
           ? { color: customStyles.currentStepLabelColor }
           : { color: customStyles.labelColor };
       return (
@@ -356,6 +360,7 @@ const StepIndicator = ({
           overflow: 'hidden',
           fontSize: customStyles.stepIndicatorLabelFontSize,
           color: customStyles.stepIndicatorLabelUnFinishedColor,
+          fontFamily: customStyles.stepIndicatorLabelFontFamily,
         };
         break;
       }

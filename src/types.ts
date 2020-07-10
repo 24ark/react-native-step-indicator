@@ -205,6 +205,15 @@ export interface StepIndicatorStyles {
   currentStepLabelColor?: string;
 
   /**
+   * Color of the finished step label
+   *
+   * @default '#4aae4f'
+   * @type {string}
+   * @memberof StepIndicatorStyles
+   */
+  finishedStepLabelColor?: string;
+
+  /**
    * Font size for the labels
    *
    * @default 13
@@ -237,6 +246,15 @@ export interface StepIndicatorStyles {
    *
    */
   labelFontFamily?: string;
+
+  /**
+   * stepIndicator fontFamily for custom fonts
+   *
+   * @type {string}
+   * @memberof StepIndicatorStyles
+   *
+   */
+  stepIndicatorLabelFontFamily?: string;
 }
 
 export interface StepIndicatorProps {
