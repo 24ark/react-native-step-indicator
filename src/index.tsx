@@ -49,8 +49,8 @@ interface DefaultStepIndicatorStyles {
     | undefined;
   currentStepLabelColor: string;
   labelFontFamily?: string;
-  finishedStepLabelColor: string;
-  stepIndicatorLabelFontFamily: string;
+  finishedStepLabelColor?: string;
+  stepIndicatorLabelFontFamily?: string;
 }
 
 const defaultStyles: DefaultStepIndicatorStyles = {
