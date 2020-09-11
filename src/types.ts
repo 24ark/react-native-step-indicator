@@ -268,6 +268,15 @@ export interface StepIndicatorProps {
   direction?: 'horizontal' | 'vertical';
 
   /**
+   * Reverse label and indicator
+   *
+   * @default false
+   * @type {boolean}
+   * @memberof StepIndicatorProps
+   */
+  reverseLabel?: boolean;
+
+  /**
    * Styles for the component
    *
    * @type {StepIndicatorStyles}

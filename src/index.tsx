@@ -82,6 +82,7 @@ const StepIndicator = ({
   currentPosition = 0,
   stepCount = 5,
   direction = 'horizontal',
+  reverseLabel = false,
   customStyles: customStylesFromProps = defaultStyles,
   labels = [],
   onPress,
@@ -144,7 +145,12 @@ const StepIndicator = ({
     } else {
       progressBarBackgroundStyle = {
         ...progressBarBackgroundStyle,
-        top: (height - customStyles.separatorStrokeWidth) / 2,
+        top: reverseLabel
+          ? undefined
+          : (height - customStyles.separatorStrokeWidth) / 2,
+        bottom: reverseLabel
+          ? (height - customStyles.separatorStrokeWidth) / 2
+          : undefined,
         left: width / (2 * stepCount),
         right: width / (2 * stepCount),
         height:
@@ -187,7 +193,12 @@ const StepIndicator = ({
     } else {
       progressBarStyle = {
         ...progressBarStyle,
-        top: (height - customStyles.separatorStrokeWidth) / 2,
+        top: reverseLabel
+          ? undefined
+          : (height - customStyles.separatorStrokeWidth) / 2,
+        bottom: reverseLabel
+          ? (height - customStyles.separatorStrokeWidth) / 2
+          : undefined,
         left: width / (2 * stepCount),
         right: width / (2 * stepCount),
         height:
@@ -420,8 +431,8 @@ const StepIndicator = ({
       style={[
         styles.container,
         direction === 'vertical'
-          ? { flexDirection: 'row', flex: 1 }
-          : { flexDirection: 'column' },
+          ? { flexDirection: reverseLabel ? 'row-reverse' : 'row', flex: 1 }
+          : { flexDirection: reverseLabel ? 'column-reverse' : 'column' },
       ]}
     >
       {width !== 0 && (

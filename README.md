@@ -86,6 +86,7 @@ onPageChange(position){
 | `currentPosition` | Number  | Current position in steps | 0
 | ```stepCount``` | Number  | Number of steps | 5
 | ```direction``` | String  | Orientation(i.e. horizontal,vertical) | horizontal
+| ```reverseLabel``` | Boolean  | Swap position between indicator and label | false
 | ```customStyles``` | Object  | Custom styling | {}
 | ```labels``` | Array  | Labels for each step | null
 | `onPress` | Function (position: Number) | Function called when a step is pressed | null
