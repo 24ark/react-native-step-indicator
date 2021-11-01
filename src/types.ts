@@ -237,6 +237,33 @@ export interface StepIndicatorStyles {
    *
    */
   labelFontFamily?: string;
+
+  /**
+   * Animation Duration for Progress Bar
+   *
+   * @default 200
+   * @type {number}
+   * @memberof StepIndicatorStyles
+   */
+  progressBarAnimationDuration?: number;
+
+  /**
+   * Animation Duration for Current Step Size
+   *
+   * @default 100
+   * @type {number}
+   * @memberof StepIndicatorStyles
+   */
+  currentStepSizeAnimationDuration?: number;
+
+  /**
+   * Animation Duration for Current Border Radius
+   *
+   * @default 100
+   * @type {number}
+   * @memberof StepIndicatorStyles
+   */
+  currentStepBorderRadiusAnimationDuration?: number;
 }
 
 export interface StepIndicatorProps {

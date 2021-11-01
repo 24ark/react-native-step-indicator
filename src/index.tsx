@@ -49,6 +49,9 @@ interface DefaultStepIndicatorStyles {
     | undefined;
   currentStepLabelColor: string;
   labelFontFamily?: string;
+  progressBarAnimationDuration: number;
+  currentStepSizeAnimationDuration: number;
+  currentStepBorderRadiusAnimationDuration: number;
 }
 
 const defaultStyles: DefaultStepIndicatorStyles = {
@@ -76,6 +79,9 @@ const defaultStyles: DefaultStepIndicatorStyles = {
   labelSize: 13,
   labelAlign: 'center',
   currentStepLabelColor: '#4aae4f',
+  progressBarAnimationDuration: 200,
+  currentStepSizeAnimationDuration: 100,
+  currentStepBorderRadiusAnimationDuration: 100,
 };
 
 const StepIndicator = ({
@@ -121,7 +127,12 @@ const StepIndicator = ({
   React.useEffect(effectCustomStyles, [customStylesFromProps]);
 
   const effectCurrentPosition = () => {
-    onCurrentPositionChanged(currentPosition);
+    onCurrentPositionChanged(
+      currentPosition,
+      customStyles.progressBarAnimationDuration,
+      customStyles.currentStepSizeAnimationDuration,
+      customStyles.currentStepBorderRadiusAnimationDuration
+    );
   };
   React.useEffect(effectCurrentPosition, [currentPosition, progressBarSize]);
 
@@ -386,7 +397,7 @@ const StepIndicator = ({
     }
   };
 
-  const onCurrentPositionChanged = (position: number) => {
+  const onCurrentPositionChanged = (position: number, progressBarAnimationDuration: number, currentStepSizeAnimationDuration: number, currentStepBorderRadiusAnimationDuration: number) => {
     if (position > stepCount - 1) {
       position = stepCount - 1;
     }
@@ -397,18 +408,18 @@ const StepIndicator = ({
     Animated.sequence([
       Animated.timing(progressAnim, {
         toValue: isNaN(animateToPosition) ? 0 : animateToPosition,
-        duration: 200,
+        duration: progressBarAnimationDuration,
         useNativeDriver: false,
       }),
       Animated.parallel([
         Animated.timing(sizeAnim, {
           toValue: customStyles.currentStepIndicatorSize,
-          duration: 100,
+          duration: currentStepSizeAnimationDuration,
           useNativeDriver: false,
         }),
         Animated.timing(borderRadiusAnim, {
           toValue: customStyles.currentStepIndicatorSize / 2,
-          duration: 100,
+          duration: currentStepBorderRadiusAnimationDuration,
           useNativeDriver: false,
         }),
       ]),
