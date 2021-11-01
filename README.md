@@ -53,7 +53,10 @@ const customStyles = {
   stepIndicatorLabelUnFinishedColor: '#aaaaaa',
   labelColor: '#999999',
   labelSize: 13,
-  currentStepLabelColor: '#fe7013'
+  currentStepLabelColor: '#fe7013',
+  progressBarAnimationDuration: 200,
+  currentStepSizeAnimationDuration: 100,
+  currentStepBorderRadiusAnimationDuration: 100,
 }
 
 
@@ -121,6 +124,9 @@ onPageChange(position){
 | ```labelSize``` | Number  | 13
 | ```labelAlign``` | String  | 'center'
 | ```labelFontFamily``` | String  |
+| ```progressBarAnimationDuration``` | Number  | 200
+| ```currentStepSizeAnimationDuration``` | Number  | 100
+| ```currentStepBorderRadiusAnimationDuration``` | Number  | 100
 
 
 ### Contributing
