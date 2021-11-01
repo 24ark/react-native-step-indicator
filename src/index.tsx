@@ -397,7 +397,12 @@ const StepIndicator = ({
     }
   };
 
-  const onCurrentPositionChanged = (position: number, progressBarAnimationDuration: number, currentStepSizeAnimationDuration: number, currentStepBorderRadiusAnimationDuration: number) => {
+  const onCurrentPositionChanged = (
+    position: number,
+    progressBarAnimationDuration: number,
+    currentStepSizeAnimationDuration: number,
+    currentStepBorderRadiusAnimationDuration: number
+  ) => {
     if (position > stepCount - 1) {
       position = stepCount - 1;
     }
