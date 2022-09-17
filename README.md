@@ -121,6 +121,7 @@ onPageChange(position){
 | ```labelSize``` | Number  | 13
 | ```labelAlign``` | String  | 'center'
 | ```labelFontFamily``` | String  |
+| ```animationDuration```|Number  | 200
 
 
 ### Contributing
