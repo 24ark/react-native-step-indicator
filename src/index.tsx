@@ -49,6 +49,7 @@ interface DefaultStepIndicatorStyles {
     | undefined;
   currentStepLabelColor: string;
   labelFontFamily?: string;
+  animationDuration?:number;
 }
 
 const defaultStyles: DefaultStepIndicatorStyles = {
@@ -76,6 +77,7 @@ const defaultStyles: DefaultStepIndicatorStyles = {
   labelSize: 13,
   labelAlign: 'center',
   currentStepLabelColor: '#4aae4f',
+  animationDuration:200,
 };
 
 const StepIndicator = ({
@@ -397,7 +399,7 @@ const StepIndicator = ({
     Animated.sequence([
       Animated.timing(progressAnim, {
         toValue: isNaN(animateToPosition) ? 0 : animateToPosition,
-        duration: 200,
+        duration: customStyles.animationDuration,
         useNativeDriver: false,
       }),
       Animated.parallel([
