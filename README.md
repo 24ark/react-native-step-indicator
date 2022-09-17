@@ -53,7 +53,8 @@ const customStyles = {
   stepIndicatorLabelUnFinishedColor: '#aaaaaa',
   labelColor: '#999999',
   labelSize: 13,
-  currentStepLabelColor: '#fe7013'
+  currentStepLabelColor: '#fe7013',
+  animationDuration:200
 }
 
 
