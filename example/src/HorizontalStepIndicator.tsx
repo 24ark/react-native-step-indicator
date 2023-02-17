@@ -1,15 +1,16 @@
-/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
+import { StepIndicatorStyles } from 'react-native-step-indicator/types';
 import Swiper from 'react-native-swiper';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const PAGES = ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5'];
 
-const firstIndicatorStyles = {
+const firstIndicatorStyles: StepIndicatorStyles = {
   stepIndicatorSize: 30,
   currentStepIndicatorSize: 40,
+  separatorStrokeStyle: 'solid',
   separatorStrokeWidth: 3,
   currentStepStrokeWidth: 5,
   separatorFinishedColor: '#4aae4f',
@@ -27,9 +28,10 @@ const firstIndicatorStyles = {
   currentStepLabelColor: '#4aae4f',
 };
 
-const secondIndicatorStyles = {
+const secondIndicatorStyles: StepIndicatorStyles = {
   stepIndicatorSize: 30,
   currentStepIndicatorSize: 40,
+  separatorStrokeStyle: 'dashed',
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
   stepStrokeCurrentColor: '#fe7013',
@@ -52,11 +54,12 @@ const secondIndicatorStyles = {
   currentStepLabelColor: '#fe7013',
 };
 
-const thirdIndicatorStyles = {
+const thirdIndicatorStyles: StepIndicatorStyles = {
   stepIndicatorSize: 25,
   currentStepIndicatorSize: 30,
-  separatorStrokeWidth: 2,
-  currentStepStrokeWidth: 3,
+  separatorStrokeStyle: 'solid',
+  separatorStrokeWidth: 1,
+  currentStepStrokeWidth: 2,
   stepStrokeCurrentColor: '#7eaec4',
   stepStrokeWidth: 3,
   stepStrokeFinishedColor: '#7eaec4',
@@ -76,6 +79,31 @@ const thirdIndicatorStyles = {
   currentStepLabelColor: '#7eaec4',
 };
 
+const forthIndicatorStyles: StepIndicatorStyles = {
+  stepIndicatorSize: 25,
+  currentStepIndicatorSize: 30,
+  separatorStrokeStyle: 'dashed',
+  separatorStrokeWidth: 4,
+  currentStepStrokeWidth: 2,
+  stepStrokeCurrentColor: '#7600bc',
+  stepStrokeWidth: 3,
+  stepStrokeFinishedColor: '#7600bc',
+  stepStrokeUnFinishedColor: '#dedede',
+  separatorFinishedColor: '#7600bc',
+  separatorUnFinishedColor: '#dedede',
+  stepIndicatorFinishedColor: '#7600bc',
+  stepIndicatorUnFinishedColor: '#ffffff',
+  stepIndicatorCurrentColor: '#ffffff',
+  stepIndicatorLabelFontSize: 0,
+  currentStepIndicatorLabelFontSize: 0,
+  stepIndicatorLabelCurrentColor: 'transparent',
+  stepIndicatorLabelFinishedColor: 'transparent',
+  stepIndicatorLabelUnFinishedColor: 'transparent',
+  labelColor: '#999999',
+  labelSize: 13,
+  currentStepLabelColor: '#7600bc',
+};
+
 const getStepIndicatorIconConfig = ({
   position,
   stepStatus,
@@ -83,8 +111,12 @@ const getStepIndicatorIconConfig = ({
   position: number;
   stepStatus: string;
 }) => {
-  const iconConfig = {
-    name: 'feed',
+  const iconConfig: {
+    name: keyof typeof MaterialIcons.glyphMap;
+    color: string;
+    size: number;
+  } = {
+    name: 'rss-feed',
     color: stepStatus === 'finished' ? '#ffffff' : '#fe7013',
     size: 15,
   };
@@ -193,8 +225,17 @@ export default function App() {
           labels={['Approval', 'Processing', 'Shipping', 'Delivery']}
         />
       </View>
+      <View style={styles.stepIndicator}>
+        <StepIndicator
+          stepCount={5}
+          customStyles={forthIndicatorStyles}
+          currentPosition={currentPage}
+          onPress={onStepPress}
+          labels={['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']}
+        />
+      </View>
       <Swiper
-        style={{ flexGrow: 1 }}
+        style={styles.swiperContainer}
         loop={false}
         index={currentPage}
         autoplay={false}
@@ -213,6 +254,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
+  },
+  swiperContainer: {
+    flexGrow: 1,
   },
   stepIndicator: {
     marginVertical: 50,
