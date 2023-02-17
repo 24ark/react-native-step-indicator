@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "react-native-step-indicator": ["./src/index"]
+      "react-native-step-indicator": ["./src/index"],
+      "react-native-step-indicator/types": ["./src/types"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

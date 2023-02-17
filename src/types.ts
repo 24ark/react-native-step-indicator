@@ -25,6 +25,15 @@ export interface StepIndicatorStyles {
   currentStepIndicatorSize?: number;
 
   /**
+   * Style of the separator stroke
+   *
+   * @default 'solid'
+   * @type {number}
+   * @memberof StepIndicatorStyles
+   */
+  separatorStrokeStyle: 'solid' | 'dashed' | undefined;
+
+  /**
    * Stroke thickness of the separator between steps
    *
    * @default 2

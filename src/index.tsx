@@ -9,6 +9,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import DashedLine from './dashed';
 import { StepIndicatorProps } from './types';
 
 const STEP_STATUS = {
@@ -20,6 +21,7 @@ const STEP_STATUS = {
 interface DefaultStepIndicatorStyles {
   stepIndicatorSize: number;
   currentStepIndicatorSize: number;
+  separatorStrokeStyle: 'solid' | 'dashed' | undefined;
   separatorStrokeWidth: number;
   separatorStrokeUnfinishedWidth: number;
   separatorStrokeFinishedWidth: number;
@@ -54,6 +56,7 @@ interface DefaultStepIndicatorStyles {
 const defaultStyles: DefaultStepIndicatorStyles = {
   stepIndicatorSize: 30,
   currentStepIndicatorSize: 40,
+  separatorStrokeStyle: 'solid',
   separatorStrokeWidth: 3,
   separatorStrokeUnfinishedWidth: 0,
   separatorStrokeFinishedWidth: 0,
@@ -91,12 +94,13 @@ const StepIndicator = ({
   const [width, setWidth] = React.useState<number>(0);
   const [height, setHeight] = React.useState<number>(0);
   const [progressBarSize, setProgressBarSize] = React.useState<number>(0);
-  const [customStyles, setCustomStyles] = React.useState<
-    DefaultStepIndicatorStyles
-  >({
-    ...defaultStyles,
-    ...customStylesFromProps,
-  });
+  const [customStyles, setCustomStyles] =
+    React.useState<DefaultStepIndicatorStyles>({
+      ...defaultStyles,
+      ...customStylesFromProps,
+    });
+
+  const isHorizontal = direction === 'horizontal';
 
   const progressAnim = React.useRef(new Animated.Value(0)).current;
   const sizeAnim = React.useRef(
@@ -130,13 +134,26 @@ const StepIndicator = ({
       backgroundColor: customStyles.separatorUnFinishedColor,
       position: 'absolute',
     };
-    if (direction === 'vertical') {
+
+    const isDashed = customStyles.separatorStrokeStyle === 'dashed';
+
+    const verticalPositionStyles: ViewStyle = {
+      left: (width - customStyles.separatorStrokeWidth) / 2,
+      top: height / (2 * stepCount),
+      bottom: height / (2 * stepCount),
+    };
+
+    const horizontalPositionStyles: ViewStyle = {
+      top: (height - customStyles.separatorStrokeWidth) / 2,
+      left: width / (2 * stepCount),
+      right: width / (2 * stepCount),
+    };
+
+    if (isHorizontal) {
       progressBarBackgroundStyle = {
         ...progressBarBackgroundStyle,
-        left: (width - customStyles.separatorStrokeWidth) / 2,
-        top: height / (2 * stepCount),
-        bottom: height / (2 * stepCount),
-        width:
+        ...horizontalPositionStyles,
+        height:
           customStyles.separatorStrokeUnfinishedWidth === 0
             ? customStyles.separatorStrokeWidth
             : customStyles.separatorStrokeUnfinishedWidth,
@@ -144,22 +161,35 @@ const StepIndicator = ({
     } else {
       progressBarBackgroundStyle = {
         ...progressBarBackgroundStyle,
-        top: (height - customStyles.separatorStrokeWidth) / 2,
-        left: width / (2 * stepCount),
-        right: width / (2 * stepCount),
-        height:
+        ...verticalPositionStyles,
+        width:
           customStyles.separatorStrokeUnfinishedWidth === 0
             ? customStyles.separatorStrokeWidth
             : customStyles.separatorStrokeUnfinishedWidth,
       };
     }
+
+    if (isDashed) {
+      return (
+        <DashedLine
+          direction={direction}
+          dashStyle={
+            isHorizontal ? horizontalPositionStyles : verticalPositionStyles
+          }
+          dashThickness={customStyles.separatorStrokeWidth}
+          dashColor={customStyles.separatorUnFinishedColor}
+          setProgressBarSize={setProgressBarSize}
+        />
+      );
+    }
+
     return (
       <View
         onLayout={(event) => {
-          if (direction === 'vertical') {
-            setProgressBarSize(event.nativeEvent.layout.height);
-          } else {
+          if (isHorizontal) {
             setProgressBarSize(event.nativeEvent.layout.width);
+          } else {
+            setProgressBarSize(event.nativeEvent.layout.height);
           }
         }}
         style={progressBarBackgroundStyle}
@@ -303,7 +333,7 @@ const StepIndicator = ({
   };
 
   const renderStep = (position: number) => {
-    let stepStyle;
+    let stepStyle: any;
     let indicatorLabelStyle: TextStyle = {};
     switch (getStepStatus(position)) {
       case STEP_STATUS.CURRENT: {

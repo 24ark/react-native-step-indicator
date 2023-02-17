@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, ViewToken } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
+import { StepIndicatorStyles } from 'react-native-step-indicator/types';
 import dummyData from './data';
 
-const stepIndicatorStyles = {
+const stepIndicatorStyles: StepIndicatorStyles = {
   stepIndicatorSize: 30,
   currentStepIndicatorSize: 40,
+  separatorStrokeStyle: 'dashed',
   separatorStrokeWidth: 3,
   currentStepStrokeWidth: 5,
   stepStrokeCurrentColor: '#fe7013',
@@ -26,8 +28,9 @@ const stepIndicatorStyles = {
 
 export default function VerticalStepIndicator() {
   const [currentPage, setCurrentPage] = React.useState<number>(0);
-  const viewabilityConfig = React.useRef({ itemVisiblePercentThreshold: 40 })
-    .current;
+  const viewabilityConfig = React.useRef({
+    itemVisiblePercentThreshold: 40,
+  }).current;
 
   const renderPage = (rowData: any) => {
     const item = rowData.item;
@@ -39,12 +42,19 @@ export default function VerticalStepIndicator() {
     );
   };
 
-  const onViewableItemsChanged = React.useCallback(({ viewableItems }) => {
-    const visibleItemsCount = viewableItems.length;
-    if (visibleItemsCount !== 0) {
-      setCurrentPage(viewableItems[visibleItemsCount - 1].index);
-    }
-  }, []);
+  const onViewableItemsChanged = React.useCallback(
+    ({ viewableItems }: { viewableItems: Array<ViewToken> }) => {
+      const visibleItemsCount = viewableItems.length;
+      if (visibleItemsCount !== 0) {
+        setCurrentPage(viewableItems[visibleItemsCount - 1].index ?? 0);
+      }
+    },
+    []
+  );
+
+  const viewabilityConfigCallbackPairs = React.useRef([
+    { viewabilityConfig, onViewableItemsChanged },
+  ]);
 
   return (
     <View style={styles.container}>
@@ -58,10 +68,10 @@ export default function VerticalStepIndicator() {
         />
       </View>
       <FlatList
-        style={{ flexGrow: 1 }}
+        style={styles.flatListContainer}
         data={dummyData.data}
         renderItem={renderPage}
-        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         viewabilityConfig={viewabilityConfig}
       />
     </View>
@@ -73,6 +83,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#ffffff',
+  },
+  flatListContainer: {
+    flexGrow: 1,
   },
   stepIndicator: {
     marginVertical: 50,

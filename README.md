@@ -34,6 +34,7 @@ import StepIndicator from 'react-native-step-indicator';
 const labels = ["Cart","Delivery Address","Order Summary","Payment Method","Track"];
 const customStyles = {
   stepIndicatorSize: 25,
+  separatorStrokeStyle: 'solid',
   currentStepIndicatorSize:30,
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
@@ -98,6 +99,7 @@ onPageChange(position){
 | ------------ | ------------ |------------ |
 | ```stepIndicatorSize``` | Number  | 30
 | ```currentStepIndicatorSize``` | Number  | 40
+| ```separatorStrokeStyle``` | String  | 'solid'
 | ```separatorStrokeWidth``` | Number  | 3
 | ```separatorStrokeUnfinishedWidth``` | Number  | 0
 | ```separatorStrokeFinishedWidth``` | Number  | 0
